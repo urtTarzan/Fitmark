@@ -1,0 +1,270 @@
+{% extends "introduction/base.html" %}
+{% load static %}
+
+{% block title %}
+  Sobre nós
+{% endblock %}
+
+{% block content %}
+<!-- HERO SECTION -->
+<section class="sobre-hero" style="background-image: url('{% static 'images/escritorio.jpeg' %}');">
+  <div class="overlay">
+    <h1>SOBRE NÓS</h1>
+  </div>
+</section>
+
+<!-- QUEM SOMOS -->
+<section class="quem-somos">
+  <h2>QUEM SOMOS?</h2>
+  <div class="texto">
+    <p>
+      A Fitmark é uma empresa dedicada ao incentivo de uma vida ativa e saudável.
+      Nosso foco é oferecer produtos e experiências que combinem atividade física,
+      alimentação equilibrada e motivação contínua. Trabalhamos com roupas fitness,
+      acessórios esportivos, conteúdos de treino e bem-estar, além de consultorias
+      personalizadas, também conectando pessoas com interesse no mundo acadêmico
+      de todas as idades.
+    </p>
+  </div>
+</section>
+
+<!-- MISSÃO / VISÃO / VALORES -->
+<section class="mvv">
+  <div class="mvv-card" id="mvv-card">
+    
+    <!-- BONECOS (em cima do card, sobrepostos) -->
+    <div class="bonecos-container">
+      <img src="{% static 'images/fitesquerda.png' %}" alt="Missão" class="boneco-img" id="img-missao">
+      <img src="{% static 'images/fitverde.png' %}" alt="Visão" class="boneco-img active" id="img-visao">
+      <img src="{% static 'images/fitdireita.png' %}" alt="Valores" class="boneco-img" id="img-valores">
+    </div>
+
+    <!-- Abas -->
+    <div class="tabs">
+      <button class="tab-button" data-tab="missao" data-img="img-missao" data-color="red">MISSÃO</button>
+      <button class="tab-button active" data-tab="visao" data-img="img-visao" data-color="green">VISÃO</button>
+      <button class="tab-button" data-tab="valores" data-img="img-valores" data-color="red">VALORES</button>
+    </div>
+
+    <!-- Conteúdo -->
+    <div class="tab-content active" id="visao">
+      <p>
+        Nossa visão é tornar-nos uma referência nacional no segmento de bem-estar e fitness,
+        reconhecida pela qualidade e inovação de nossas soluções. Queremos impactar positivamente
+        a vida de pessoas que buscam saúde, equilíbrio e estilo de vida ativo, criando uma
+        comunidade engajada e motivada a alcançar seus objetivos de forma saudável e consciente.
+      </p>
+    </div>
+
+    <div class="tab-content" id="missao">
+      <p>
+        Nossa missão é promover saúde, bem-estar e autoestima, conectando pessoas
+        através da cultura física e do conhecimento. Buscamos incentivar hábitos
+        saudáveis, ampliando o acesso à prática esportiva e ao universo fitness.
+      </p>
+    </div>
+
+    <div class="tab-content" id="valores">
+      <p>
+        Comprometimento, inovação, ética e sustentabilidade são os pilares da Fitmark.
+        Trabalhamos para entregar qualidade e responsabilidade em cada iniciativa.
+      </p>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_style %}
+<style>
+/* --- HERO --- */
+.sobre-hero {
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+.sobre-hero .overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sobre-hero h1 {
+  color: #fff;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* --- QUEM SOMOS --- */
+.quem-somos {
+  text-align: center;
+  padding: 40px 20px;
+  background: #fff;
+}
+.quem-somos h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+.quem-somos .texto {
+  max-width: 700px;
+  margin: 0 auto;
+  background: #333;
+  color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  font-size: 1rem;
+  line-height: 1.6;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+}
+
+/* --- MVV CARD --- */
+.mvv {
+  background: #f3f3f3;
+  padding: 80px 20px 50px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+/* Card principal */
+.mvv-card {
+  background: #fff;
+  border-radius: 12px;
+  max-width: 800px;
+  width: 100%;
+  padding: 100px 20px 30px;
+  text-align: center;
+  border: 4px solid #0a0; /* verde inicial (VISÃO) */
+  position: relative;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Bonecos */
+/* Bonecos posicionados acima do card */
+.bonecos-container {
+  position: absolute;
+  top: -232px; /* altura exata para que os bonecos encostem no topo do card */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 40px;
+  z-index: 10;
+}
+
+/* Estilo dos bonecos */
+.boneco-img {
+  max-height: 290px;
+  opacity: 0.5;
+  transition: all 0.4s ease;
+  transform: translateY(15px);
+}
+
+/* Boneco ativo (colorido, mais destacado e um pouco maior) */
+.boneco-img.active {
+  opacity: 1;
+  transform: translateY(0) scale(1.05);
+  filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.2));
+}
+
+/* Ajuste para o boneco do meio (verde) ficar ligeiramente mais alto */
+#img-visao {
+  transform: translateY(-10px);
+}
+#img-visao.active {
+  transform: translateY(-20px) scale(1.05);
+}
+
+
+/* Tabs */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+.tab-button {
+  background: none;
+  border: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.3s, border-bottom 0.3s;
+}
+.tab-button.active {
+  color: #0a0;
+  border-bottom: 2px solid #0a0;
+}
+.tab-button[data-color="red"].active {
+  color: #d00;
+  border-bottom-color: #d00;
+}
+
+/* Conteúdo */
+.tab-content {
+  display: none;
+  text-align: center;
+  line-height: 1.6;
+  min-height: 80px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.tab-content.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+</style>
+{% endblock %}
+
+{% block extra_script %}
+<script>
+  const buttons = document.querySelectorAll('.tab-button');
+  const contents = document.querySelectorAll('.tab-content');
+  const images = document.querySelectorAll('.boneco-img');
+  const card = document.getElementById('mvv-card');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tabId = btn.getAttribute('data-tab');
+      const imgId = btn.getAttribute('data-img');
+      const color = btn.getAttribute('data-color');
+
+      // Tabs
+      buttons.forEach(b => b.classList.remove('active'));
+      contents.forEach(c => c.classList.remove('active'));
+      images.forEach(i => i.classList.remove('active'));
+
+      btn.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+      document.getElementById(imgId).classList.add('active');
+
+      // Muda a cor da borda + sombra do card
+      if (color === 'green') {
+        card.style.borderColor = '#0a0';
+        
+      } else {
+        card.style.borderColor = '#d00';
+       
+      }
+    });
+  });
+</script>
+{% endblock %}

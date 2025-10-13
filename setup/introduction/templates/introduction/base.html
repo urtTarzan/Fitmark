@@ -1,0 +1,506 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="shortcut icon" href="{% static 'images/logo.png' %}" type="image/x-icon">
+  
+  <title>FITMARK - {% block title %} {% endblock %}</title>
+    <!-- FONTES -->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <!-- Link da fonte Alan Sans -->
+        <link href="https://fonts.googleapis.com/css2?family=Alan+Sans:wght@300..900&display=swap" rel="stylesheet">
+        {% block extra_fonts %}{% endblock %}
+</head>
+<body>
+  <header class="navbar">
+    <div class="dropdown">
+      <button id="menu-button" class="dropdown-btn">
+        <img src="{% static 'images/menu-icon.png' %}" alt="Menu" style="width: 34px; height: auto;">
+      </button>
+          <div class="dropdown-content">
+            <a href="/parceria">parceiria</a>
+            <a href="/sobre">sobre nós</a>
+          </div>
+    </div>
+    <div class="logo"> 
+      <a href="/" id="link_logo">
+        <img id="logo-image" src="{% static 'images/logo.png' %}" alt="Logo FITMARK">
+        <img id="logo-text" src="{% static 'images/fitmark-text.png' %}" alt="fitmark-text">
+      </a>
+      
+    </div>
+    <nav class="nav-links">
+      <a href="/parceria" class="btn" id="parceiria" >Parceria</a>
+      <a href="/sobre" class="btn" id="sobre" >Sobre</a>
+      <a href="#login" class="btn" id="nav-login">Login</a>
+      <a href="#signin" class="btn" id="nav-signin">Cadastro</a>
+    </nav>
+    <!-- Botão de abrir o login -->
+  <button id="login-btn">
+    <img src="{% static 'images/accont.png' %}" alt="Login" style="width: 34px; height: auto;">
+  </button>
+
+      <!-- Modal de login -->
+      <div id="login-modal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+
+          <!-- Conteúdo do Login / Sign-in -->
+          <div id="login-form">
+            <img src="{% static 'images/fitmark-text.png' %}" alt="fitmark-text" width="100px" 
+              style="display: block; margin: 0 0 10px 0px;">
+            <h2 class="form-title">LOGIN</h2>
+            <input type="email" placeholder="Email">
+            <input type="password" placeholder="Senha">
+            <button>Entrar</button>
+            <p>Não tem conta? <a href="#" id="switch-to-signin"><strong>Cadastre-se</strong></a></p>
+          </div>
+
+          <div id="signin-form" style="display: none;">
+            <img src="{% static 'images/fitmark-text.png' %}" alt="fitmark-text" width="100px" 
+              style="display: block; margin: 0 0 10px 0px;">
+            <h2 class="form-title">CADASTRE-SE</h2>
+            <input type="text" placeholder="Nome">
+            <input type="email" placeholder="Email">
+            <input type="password" placeholder="Senha">
+            <button>Criar conta</button>
+            <p>Já tem conta? <a href="#" id="switch-to-login"><strong>Login</strong></a></p>
+          </div>
+
+  </div>
+</div>
+      
+
+  </header>
+
+  <main>
+    {% block content %}
+
+    {% endblock %}
+  </main> 
+
+<footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-left">
+      <h3>FitMark</h3>
+      <p>Treine forte, viva melhor.</p>
+    </div>
+    <div class="footer-center">
+    </div>
+    <div class="footer-right">
+      <h4>Redes Sociais</h4>
+      <a href="#">Instagram</a> |
+      <a href="#">Facebook</a> |
+      <a href="#">YouTube</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2025 FitMark. Todos os direitos reservados.
+  </div>
+</footer>
+</body>
+<script>
+// dropdown
+const dropdownBtn = document.querySelector(".dropdown-btn");
+const dropdownContent = document.querySelector(".dropdown-content");
+
+dropdownBtn.addEventListener("click", () => {
+  dropdownContent.style.display = dropdownContent.style.display === "flex" ? "none" : "flex";
+});
+
+// Opcional: fecha o menu se clicar fora
+window.addEventListener("click", (e) => {
+  if (!e.target.closest(".dropdown")) {
+    dropdownContent.style.display = "none";
+  }
+});
+        // modal
+        const loginBtn = document.getElementById("login-btn");
+        const modal = document.getElementById("login-modal");
+        const closeBtn = document.querySelector(".close");
+
+        // Abrir modal
+        loginBtn.addEventListener("click", () => {
+          modal.style.display = "flex";
+        });
+
+        // Fechar modal ao clicar no X
+        closeBtn.addEventListener("click", () => {
+          modal.style.display = "none";
+        });
+
+
+                // alternar entre login e singin
+
+                const switchToSignin = document.getElementById("switch-to-signin");
+                const switchToLogin = document.getElementById("switch-to-login");
+                const loginForm = document.getElementById("login-form");
+                const signinForm = document.getElementById("signin-form");
+
+                switchToSignin.addEventListener("click", (e) => {
+                  e.preventDefault();
+                  loginForm.style.display = "none";
+                  signinForm.style.display = "block";
+                });
+
+                switchToLogin.addEventListener("click", (e) => {
+                  e.preventDefault();
+                  loginForm.style.display = "block";
+                  signinForm.style.display = "none";
+                });
+
+                        //  Botões de navegação (Navbar) para Login/Sign-in
+
+                        const navLoginBtn = document.getElementById("nav-login");
+                        const navSigninBtn = document.getElementById("nav-signin");
+
+                        navLoginBtn.addEventListener("click", (e) => {
+                          e.preventDefault();
+                          modal.style.display = "flex";      // abre modal
+                          loginForm.style.display = "block";  // mostra login
+                          signinForm.style.display = "none";  // esconde signin
+                        });
+
+                        navSigninBtn.addEventListener("click", (e) => {
+                          e.preventDefault();
+                          modal.style.display = "flex";       // abre modal
+                          loginForm.style.display = "none";    // esconde login
+                          signinForm.style.display = "block";  // mostra signin
+                        });
+                        // Mudar cor da navbar ao rolar a página    
+                                let lastScrollY = window.scrollY;
+                                const navbar = document.querySelector('.navbar');
+
+                                window.addEventListener('scroll', () => {
+                                  if (window.scrollY > lastScrollY && window.scrollY > 100) {
+                                    // descendo a página -> esconde a navbar
+                                    navbar.style.top = '-100px'; // some pra cima
+                                  } else {
+                                    // subindo a página -> mostra a navbar
+                                    navbar.style.top = '0';
+                                  }
+                                  
+                                  lastScrollY = window.scrollY;
+                                });
+
+</script>
+  {% block extra_script %}{% endblock %}
+  {% block extra_style %}{% endblock %}
+<style>
+  
+#link_logo{
+  text-decoration: none;  /* Remove o sublinhado */
+}
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #E1E1E1;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #cfd0d1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: top 0.3s ease, background-color 0.3s ease;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 24px;
+  color: #FF0000;
+}
+
+.logo img  {
+  width: 50px;
+  height: auto;
+  margin-right: 10px;
+}
+#logo-text {
+  width: 130px;
+  margin-bottom: 10px;
+}
+.nav-links a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+  padding: 6px 12px;
+  transition: background-color 0.3s ease;
+  font-family: Alan Sans, sans-serif;
+  
+}
+
+.nav-links a.btn:hover {
+  background-color: #dcdcdc;
+}
+
+#sobre{
+  background-color: transparent;
+}
+#parceiria{
+  background-color: transparent;
+}
+
+#nav-login{ 
+  /* dei uma leve mudada no nome xD */
+  background-color: #ff1a1a; /* vermelho vibrante */
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 26, 26, 0.5); /* sombra vermelha suave */
+  transition: all 0.3s ease;
+}
+
+#nav-login:hover {
+  background-color: #ff4d4d; /* fica mais claro */
+  box-shadow: 0 0 20px rgba(255, 26, 26, 0.8); /* glow vermelho */
+  transform: translateY(-2px); /* sobe um pouco */
+}
+
+#nav-signin{
+  background-color: #ffffff; /* vermelho vibrante */
+  color: rgb(0, 0, 0);
+  padding: 12px 25px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 26, 26, 0.5); /* sombra vermelha suave */
+  transition: all 0.3s ease;
+}
+
+#nav-signin:hover {
+  background-color: #ff4d4d; /* fica mais claro */
+  box-shadow: 0 0 20px rgba(255, 26, 26, 0.8); /* glow vermelho */
+  transform: translateY(-2px); /* sobe um pouco */
+}
+      /* PARTE DO MINI MENU ABAIXO */
+      .dropdown {
+        position: relative;
+        display: none;
+      }
+
+      /* Botão do menu */
+      .dropdown-btn {
+        background-color: transparent;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 6px;
+        transition: background 0.2s;
+      }
+
+      .dropdown-btn:hover {
+        background-color: #929292; /* muda fundo no hover */
+      }
+
+      /* Menu escondido por padrão */
+      .dropdown-content {
+        display: none; 
+        position: absolute;
+        top: 110%;
+        right: 1;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        min-width: 140px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        flex-direction: column;
+        z-index: 1000;
+      }
+
+      /* Links dentro do menu */
+      .dropdown-content a {
+        padding: 12px 15px;
+        text-decoration: none;
+        color: #333;
+      }
+
+      .dropdown-content a:hover {
+        background-color: #ff0000;
+        color: white;
+      }
+
+      /* Responsivo */
+      @media screen and (max-width: 768px) {
+        .btn { display: none; }
+        .dropdown { display: block; }
+          .navbar {
+          justify-content: flex-start; /* aproxima os elementos da esquerda */
+          gap: 10px; /* espaçamento pequeno entre logo e menu */
+        }
+      }
+
+      #login-btn {
+        display: none;
+      }
+
+      /* Responsivo - telas pequenas */
+      @media screen and (max-width: 768px) {
+        .btn { display: none; }        /* esconde links grandes */
+        .dropdown { display: block; }  /* mostra menu mobile */
+        #login-btn { display: block; } /* mostra botão de login */
+        .navbar {
+          justify-content: flex-start;
+          gap: 10px;
+        }
+      }
+              /* Modal */
+              .modal {
+                display: none; /* escondido por padrão */
+                position: fixed;
+                z-index: 2000;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgba(0,0,0,0.5); /* fundo escuro */
+                justify-content: center;
+                align-items: center;
+              }
+
+              #login-form p,
+              #signin-form p {
+                text-align: center;
+                margin-top: 10px;
+              }
+              .modal-content {
+                background-color: #fff;
+                padding: 20px 30px;
+                border-radius: 10px;
+                width: 450px;
+                position: relative;
+              }
+              .form-title {
+                text-align: center;
+                margin-bottom: 20px;
+                font-family: Alan Sans, sans-serif;
+              }
+
+              /* Botão fechar */
+              .close {
+                position: absolute;
+                top: 10px;
+                right: 15px;
+                font-size: 28px;
+                font-weight: bold;
+                cursor: pointer;
+              }
+
+              /* Inputs e botões */
+              .modal-content input {
+                width: 100%;
+                margin: 10px 0;
+                padding: 8px;
+              }
+
+              .modal-content button {
+                width: 100%;
+                padding: 10px;
+                margin-top: 10px;
+                background-color: #ff0000;
+                color: white;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+              }
+
+              .modal-content a {
+                color: #ff0000;
+                cursor: pointer;
+                text-decoration: underline;
+              }
+
+              #login-btn {
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                padding: 6px;
+                border-radius: 6px;
+                transition: background 0.2s;
+
+                /* Colar no canto direito */
+                position: absolute;
+                right: 30px; /* distância da borda direita */ 
+              }
+                        /* Footer */
+                        .site-footer {
+                          background-color: #000; /* Preto */
+                          color: #fff;
+                          padding: 30px 20px;
+                          font-family: 'Alan Sans', sans-serif;
+                        }
+
+                        .footer-container {
+                          display: flex;
+                          flex-wrap: wrap;
+                          justify-content: space-between;
+                          max-width: 1200px;
+                          margin: auto;
+                        }
+
+                        .footer-left, .footer-center, .footer-right {
+                          flex: 1 1 200px;
+                          margin: 10px;
+                        }
+
+                        .footer-left h3 {
+                          margin-bottom: 10px;
+                          font-weight: 700;
+                        }
+
+                        .footer-center ul {
+                          list-style: none;
+                          padding: 0;
+                        }
+
+                        .footer-center ul li {
+                          margin-bottom: 8px;
+                        }
+
+                        .footer-center ul li a,
+                        .footer-right a {
+                          color: #fff;
+                          text-decoration: none;
+                          transition: color 0.3s;
+                        }
+
+                        .footer-center ul li a:hover,
+                        .footer-right a:hover {
+                          color: #ff0000; /* Vermelho ao passar o mouse */
+                        }
+
+                        .footer-bottom {
+                          text-align: center;
+                          margin-top: 20px;
+                          font-size: 14px;
+                          border-top: 1px solid #444;
+                          padding-top: 10px;
+                        }
+</style>
+</html>

@@ -1,0 +1,300 @@
+
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #E1E1E1;
+}
+
+.navbar {
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #cfd0d1;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 24px;
+  color: #FF0000;
+}
+
+.logo img  {
+  width: 50px;
+  height: auto;
+  margin-right: 10px;
+}
+#logo-text {
+  width: 130px;
+}
+.nav-links a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+  padding: 6px 12px;
+  transition: background-color 0.3s ease;
+  font-family: Alan Sans, sans-serif;
+  
+}
+
+.nav-links a.btn:hover {
+  background-color: #dcdcdc;
+}
+
+#sobre{
+  background-color: transparent;
+}
+#parceiria{
+  background-color: transparent;
+}
+
+#nav-login{
+  background-color: #ff1a1a; /* vermelho vibrante */
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 26, 26, 0.5); /* sombra vermelha suave */
+  transition: all 0.3s ease;
+}
+
+#nav-login:hover {
+  background-color: #ff4d4d; /* fica mais claro */
+  box-shadow: 0 0 20px rgba(255, 26, 26, 0.8); /* glow vermelho */
+  transform: translateY(-2px); /* sobe um pouco */
+}
+
+#nav-signin{
+  background-color: #ff1a1a; /* vermelho vibrante */
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 26, 26, 0.5); /* sombra vermelha suave */
+  transition: all 0.3s ease;
+}
+
+#nav-signin:hover {
+  background-color: #ff4d4d; /* fica mais claro */
+  box-shadow: 0 0 20px rgba(255, 26, 26, 0.8); /* glow vermelho */
+  transform: translateY(-2px); /* sobe um pouco */
+}
+      /* PARTE DO MINI MENU ABAIXO */
+      .dropdown {
+        position: relative;
+        display: none;
+      }
+
+      /* Botão do menu */
+      .dropdown-btn {
+        background-color: transparent;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 6px;
+        transition: background 0.2s;
+      }
+
+      .dropdown-btn:hover {
+        background-color: #929292; /* muda fundo no hover */
+      }
+
+      /* Menu escondido por padrão */
+      .dropdown-content {
+        display: none; 
+        position: absolute;
+        top: 110%;
+        right: 1;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        min-width: 140px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        flex-direction: column;
+        z-index: 1000;
+      }
+
+      /* Links dentro do menu */
+      .dropdown-content a {
+        padding: 12px 15px;
+        text-decoration: none;
+        color: #333;
+      }
+
+      .dropdown-content a:hover {
+        background-color: #ff0000;
+        color: white;
+      }
+
+      /* Responsivo */
+      @media screen and (max-width: 768px) {
+        .btn { display: none; }
+        .dropdown { display: block; }
+          .navbar {
+          justify-content: flex-start; /* aproxima os elementos da esquerda */
+          gap: 10px; /* espaçamento pequeno entre logo e menu */
+        }
+      }
+
+      #login-btn {
+        display: none;
+      }
+
+      /* Responsivo - telas pequenas */
+      @media screen and (max-width: 768px) {
+        .btn { display: none; }        /* esconde links grandes */
+        .dropdown { display: block; }  /* mostra menu mobile */
+        #login-btn { display: block; } /* mostra botão de login */
+        .navbar {
+          justify-content: flex-start;
+          gap: 10px;
+        }
+      }
+              /* Modal */
+              .modal {
+                display: none; /* escondido por padrão */
+                position: fixed;
+                z-index: 2000;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgba(0,0,0,0.5); /* fundo escuro */
+                justify-content: center;
+                align-items: center;
+              }
+
+              #login-form p,
+              #signin-form p {
+                text-align: center;
+                margin-top: 10px;
+              }
+              .modal-content {
+                background-color: #fff;
+                padding: 20px 30px;
+                border-radius: 10px;
+                width: 450px;
+                position: relative;
+              }
+              .form-title {
+                text-align: center;
+                margin-bottom: 20px;
+                font-family: Alan Sans, sans-serif;
+              }
+
+              /* Botão fechar */
+              .close {
+                position: absolute;
+                top: 10px;
+                right: 15px;
+                font-size: 28px;
+                font-weight: bold;
+                cursor: pointer;
+              }
+
+              /* Inputs e botões */
+              .modal-content input {
+                width: 100%;
+                margin: 10px 0;
+                padding: 8px;
+              }
+
+              .modal-content button {
+                width: 100%;
+                padding: 10px;
+                margin-top: 10px;
+                background-color: #ff0000;
+                color: white;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+              }
+
+              .modal-content a {
+                color: #ff0000;
+                cursor: pointer;
+                text-decoration: underline;
+              }
+
+              #login-btn {
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                padding: 6px;
+                border-radius: 6px;
+                transition: background 0.2s;
+
+                /* Colar no canto direito */
+                position: absolute;
+                right: 30px; /* distância da borda direita */ 
+              }
+                        /* Footer */
+                        .site-footer {
+                          background-color: #000; /* Preto */
+                          color: #fff;
+                          padding: 30px 20px;
+                          font-family: 'Alan Sans', sans-serif;
+                        }
+
+                        .footer-container {
+                          display: flex;
+                          flex-wrap: wrap;
+                          justify-content: space-between;
+                          max-width: 1200px;
+                          margin: auto;
+                        }
+
+                        .footer-left, .footer-center, .footer-right {
+                          flex: 1 1 200px;
+                          margin: 10px;
+                        }
+
+                        .footer-left h3 {
+                          margin-bottom: 10px;
+                          font-weight: 700;
+                        }
+
+                        .footer-center ul {
+                          list-style: none;
+                          padding: 0;
+                        }
+
+                        .footer-center ul li {
+                          margin-bottom: 8px;
+                        }
+
+                        .footer-center ul li a,
+                        .footer-right a {
+                          color: #fff;
+                          text-decoration: none;
+                          transition: color 0.3s;
+                        }
+
+                        .footer-center ul li a:hover,
+                        .footer-right a:hover {
+                          color: #ff0000; /* Vermelho ao passar o mouse */
+                        }
+
+                        .footer-bottom {
+                          text-align: center;
+                          margin-top: 20px;
+                          font-size: 14px;
+                          border-top: 1px solid #444;
+                          padding-top: 10px;
+                        }
