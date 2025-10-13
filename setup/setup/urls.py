@@ -16,12 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from introduction.views import home, parceria,sobre
+from introduction import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home, name='home'),
-    path('parceria', parceria, name='parceria'),
-    path('sobre', sobre, name='sobre'),
+    path('', views.home, name='home'),
+    path('parceria', views.parceria, name='parceria'),
+    path('sobre', views.sobre, name='sobre'),
+    path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
+    path('register/', views.register_view, name='register'),  # nova rota
 
 ]

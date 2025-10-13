@@ -136,3 +136,7 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+
+LOGIN_REDIRECT_URL = 'home'   # redireciona após login
+LOGOUT_REDIRECT_URL = 'login' # volta pro login após sair
