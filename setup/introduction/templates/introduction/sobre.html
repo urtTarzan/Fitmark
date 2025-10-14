@@ -7,7 +7,7 @@
 
 {% block content %}
 <!-- HERO SECTION -->
-<section class="sobre-hero" style="background-image: url('{% static 'images/escritorio.jpeg' %}');">
+<section class="sobre-hero" style="background-image: url('{% static 'images/corridafeliz.jpg' %}');">
   <div class="overlay">
     <h1>SOBRE NÓS</h1>
   </div>
@@ -47,7 +47,7 @@
     </div>
 
     <!-- Conteúdo -->
-    <div class="tab-content active" id="visao">
+    <div class="tab-content active" id="visao" style="text-align: justify;">
       <p>
         Nossa visão é tornar-nos uma referência nacional no segmento de bem-estar e fitness,
         reconhecida pela qualidade e inovação de nossas soluções. Queremos impactar positivamente
@@ -56,7 +56,7 @@
       </p>
     </div>
 
-    <div class="tab-content" id="missao">
+    <div class="tab-content" id="missao" style="text-align: justify;">
       <p>
         Nossa missão é promover saúde, bem-estar e autoestima, conectando pessoas
         através da cultura física e do conhecimento. Buscamos incentivar hábitos
@@ -64,10 +64,14 @@
       </p>
     </div>
 
-    <div class="tab-content" id="valores">
+    <div class="tab-content" id="valores" style="text-align: justify;">
       <p>
-        Comprometimento, inovação, ética e sustentabilidade são os pilares da Fitmark.
-        Trabalhamos para entregar qualidade e responsabilidade em cada iniciativa.
+        <strong>Comprometimento:</strong> Oferecemos produtos e serviços eficazes, com responsabilidade e dedicação. <br>
+        <strong>Inovação:</strong> Buscamos ideias criativas para tornar a experiência fitness mais prática e envolvente.<br>
+        <strong>Ética:</strong> Agimos com transparência e integridade em todas as ações.<br>
+        <strong>Acessibilidade:</strong> Tornamos o bem-estar acessível e adaptável a todos os estilos de vida.<br>
+        <strong>Sustentabilidade:</strong> Incentivamos práticas conscientes e o cuidado com o meio ambiente.<br>
+        <strong>Respeito à diversidade corporal:</strong> Valorizamos todos os corpos, priorizando saúde, autoestima e qualidade de vida.  
       </p>
     </div>
   </div>
@@ -77,9 +81,14 @@
 
 {% block extra_style %}
 <style>
+  @font-face {
+  font-family: 'Vampire Wars';
+  src: url("{% static 'fonts/Vampire Wars.ttf' %}") format('truetype');
+}
+
 /* --- HERO --- */
 .sobre-hero {
-  height: 300px;
+  height: 490px;
   background-size: cover;
   background-position: center;
   position: relative;
@@ -95,7 +104,8 @@
   color: #fff;
   font-size: 2.5rem;
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: lighter;
+  font-family: 'Vampire Wars', Courier, monospace;
 }
 
 /* --- QUEM SOMOS --- */
@@ -105,11 +115,13 @@
   background: #fff;
 }
 .quem-somos h2 {
-  font-size: 1.8rem;
+  font-size: 2.5rem;
   margin-bottom: 20px;
-  font-weight: 700;
+  font-weight: lighter;
+  font-family: 'Vampire Wars', Courier, monospace;
 }
 .quem-somos .texto {
+  font-family: 'philosopher',sans-serif;
   max-width: 700px;
   margin: 0 auto;
   background: #333;
@@ -119,15 +131,17 @@
   font-size: 1rem;
   line-height: 1.6;
   box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+  
 }
 
 /* --- MVV CARD --- */
 .mvv {
-  background: #f3f3f3;
+  background: #ffffff;
   padding: 80px 20px 50px;
   display: flex;
   justify-content: center;
   position: relative;
+  margin-top: 300px;
 }
 
 /* Card principal */
@@ -136,7 +150,7 @@
   border-radius: 12px;
   max-width: 800px;
   width: 100%;
-  padding: 100px 20px 30px;
+  padding: 15px 20px 30px;  /* diminui de 100px para 60px */
   text-align: center;
   border: 4px solid #0a0; /* verde inicial (VISÃO) */
   position: relative;
@@ -146,6 +160,7 @@
 /* Bonecos */
 /* Bonecos posicionados acima do card */
 .bonecos-container {
+  pointer-events: none; /* clique passa através da imagem */
   position: absolute;
   top: -232px; /* altura exata para que os bonecos encostem no topo do card */
   left: 50%;
@@ -159,26 +174,26 @@
 
 /* Estilo dos bonecos */
 .boneco-img {
+  pointer-events: none; /* clique passa através da imagem */
   max-height: 290px;
   opacity: 0.5;
-  transition: all 0.4s ease;
+  transition: opacity 0.4s ease, filter 0.4s ease;
   transform: translateY(15px);
 }
 
-/* Boneco ativo (colorido, mais destacado e um pouco maior) */
 .boneco-img.active {
   opacity: 1;
-  transform: translateY(0) scale(1.05);
+  transform: translateY(15px); /* Mantém a mesma posição */
   filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.2));
 }
 
-/* Ajuste para o boneco do meio (verde) ficar ligeiramente mais alto */
 #img-visao {
-  transform: translateY(-10px);
+  transform: translateY(-60px);
 }
 #img-visao.active {
-  transform: translateY(-20px) scale(1.05);
+  transform: translateY(-60px); /* Mantém igual também */
 }
+
 
 
 /* Tabs */
