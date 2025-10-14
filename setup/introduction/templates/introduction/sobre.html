@@ -77,6 +77,53 @@
   </div>
 </section>
 
+<section class="nosso_objetivo">
+  <h2>Nosso Objetivo</h2>
+  <div class="objetivo-wrapper">
+    <div class="imagem-objetivo">
+      <img src="{% static 'images/estrangeiro.png' %}" alt="Nosso objetivo">
+    </div>
+    <div class="texto">
+      <ul style="text-align: justify;">
+        <li>Promover saúde, condicionamento físico e equilíbrio mental de forma integrada.</li>
+        <li>Combinar treino, nutrição e práticas de bem-estar em uma experiência completa e personalizada.</li>
+        <li>Oferecer serviços e produtos de alta qualidade, sempre com foco nos resultados e na satisfação dos clientes.</li>
+        <li>Construir uma comunidade engajada, apoiada na busca por um estilo de vida saudável.</li>
+        <li>Ser referência no mercado fitness e de bem-estar, reconhecida pela inovação e atendimento humanizado.</li>
+        <li>Atuar tanto no ambiente físico quanto no digital, criando experiências motivadoras e transformadoras.</li>
+        <li>Gerar impacto positivo e duradouro na vida das pessoas.</li>
+      </ul>    
+    </div>
+  </div>
+</section>
+
+<!-- NOSSA EQUIPE -->
+<section class="nossa-equipe">
+  <h2>Nossa Equipe</h2>
+  <div class="equipe-wrapper">
+
+    <!-- FRONT-END -->
+    <div class="membro" data-role="front" data-color="green">
+      <div class="membro-img">
+        <img src="{% static 'images/gatofeio.png' %}" alt="Front-End">
+      </div>
+      <p class="cargo">Front-End</p>
+      <a href="https://github.com/seuusuariofront" target="_blank" class="btn-github">Abrir GitHub</a>
+    </div>
+
+    <!-- BACK-END -->
+    <div class="membro" data-role="back" data-color="red">
+      <div class="membro-img">
+        <img src="{% static 'images/gatofeio.png' %}" alt="Back-End">
+      </div>
+      <p class="cargo">Back-End</p>
+      <a href="https://github.com/seuusuarioback" target="_blank" class="btn-github">Abrir GitHub</a>
+    </div>
+
+  </div>
+</section>
+
+
 {% endblock %}
 
 {% block extra_style %}
@@ -133,15 +180,14 @@
   box-shadow: 0 4px 15px rgba(0,0,0,0.25);
   
 }
-
 /* --- MVV CARD --- */
 .mvv {
-  background: #ffffff;
+  background: #E1E1E1; 
   padding: 80px 20px 50px;
   display: flex;
   justify-content: center;
   position: relative;
-  margin-top: 300px;
+  margin-top: 200px;
 }
 
 /* Card principal */
@@ -179,6 +225,7 @@
   opacity: 0.5;
   transition: opacity 0.4s ease, filter 0.4s ease;
   transform: translateY(15px);
+  filter: grayscale(100%) /* deixa cinza pros inativos ne papae */
 }
 
 .boneco-img.active {
@@ -236,6 +283,192 @@
   animation: fadeIn 0.3s ease;
 }
 
+/* a porra do nosso objetivo */
+.nosso_objetivo {
+  text-align: center;
+  padding: 40px 20px;
+  background: #fff;
+}
+
+.nosso_objetivo h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  font-weight: lighter;
+  font-family: 'Vampire Wars', Courier, monospace;
+}
+
+/* Wrapper para organizar imagem e texto lado a lado */
+.objetivo-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Texto com fundo escuro */
+.nosso_objetivo .texto {
+  font-family: 'philosopher', sans-serif;
+  background: #333;
+  color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  font-size: 1rem;
+  line-height: 1.6;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  max-width: 600px;
+  flex: 1 1 50%;
+}
+
+.nosso_objetivo .texto ul {
+  padding-left: 20px;
+  text-align: justify;
+}
+
+/* Imagem ao lado do texto */
+.imagem-objetivo {
+  flex: 1 1 35%;
+  max-width: 400px;
+}
+
+.imagem-objetivo img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* --- NOSSA EQUIPE --- */
+.nossa-equipe {
+  text-align: center;
+  padding: 60px 20px;
+  background: #111;
+  color: #fff;
+}
+
+.nossa-equipe h2 {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  font-family: 'Vampire Wars', Courier, monospace;
+  font-weight: lighter;
+}
+
+.equipe-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.membro {
+  position: relative;
+  width: 250px;
+  text-align: center;
+  border-radius: 12px;
+  padding: 15px;
+  background: #222;
+  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+/* Efeito de hover - muda a cor conforme o data-color */
+.membro[data-color="red"]:hover {
+  background: rgba(255, 0, 0, 0.3);
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+}
+
+.membro[data-color="green"]:hover {
+  background: rgba(0, 255, 0, 0.3);
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+}
+
+.membro:hover {
+  transform: translateY(-5px);
+}
+
+.membro-img {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.membro img {
+  width: 100%;
+  border-radius: 12px;
+  filter: grayscale(100%);
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+/* Imagem parcialmente colorida no hover */
+.membro:hover img {
+  filter: grayscale(50%);
+}
+
+/* Quando está ativo: totalmente colorida */
+.membro.active img {
+  filter: grayscale(0%);
+  transform: scale(1.03);
+}
+
+/* Fundo colorido permanente quando ativo */
+.membro.active[data-color="red"] {
+  background: rgba(255, 0, 0, 0.3);
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+}
+
+.membro.active[data-color="green"] {
+  background: rgba(0, 255, 0, 0.3);
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.6);
+}
+
+/* Cargo e botão */
+.cargo {
+  margin-top: 12px;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+/* Botão GitHub embaixo */
+.btn-github {
+  display: none;
+  margin-top: 12px;
+  background: #fff;
+  color: #000;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+/* Aparece só quando ativo */
+.membro.active .btn-github {
+  display: inline-block;
+  animation: fadeIn 0.3s ease;
+}
+
+.btn-github:hover {
+  background: #ddd;
+  transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+
 @keyframes fadeIn {
   from {opacity: 0;}
   to {opacity: 1;}
@@ -281,5 +514,19 @@
       }
     });
   });
+
+ // --- NOSSA EQUIPE ---
+const membros = document.querySelectorAll('.membro');
+
+membros.forEach(membro => {
+  membro.addEventListener('click', () => {
+    membros.forEach(m => m.classList.remove('active'));
+    membro.classList.add('active');
+  });
+});
+
+
+
+
 </script>
 {% endblock %}
