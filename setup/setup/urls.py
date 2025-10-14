@@ -17,14 +17,25 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from introduction import views
+from principal.views import home
+from django.shortcuts import redirect
 
 urlpatterns = [
+    # redireciona a URL base para introduction
+    path('', lambda request: redirect('introduction_home')),
+
+    # publicas
     path('admin/', admin.site.urls),
-    path('', views.home, name='home'),
-    path('parceria', views.parceria, name='parceria'),
-    path('sobre', views.sobre, name='sobre'),
+    path('introduction/', views.home, name='introduction_home'),
+    path('parceria/', views.parceria, name='parceria'),
+    path('sobre/', views.sobre, name='sobre'),
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
-    path('register/', views.register_view, name='register'),  # nova rota
+    path('register/', views.register_view, name='register'),  
 
+    # erro
+    path('erro-login/', views.erro_login, name='erro_login'),
+
+    # login necessario
+    path('home/', home, name='home'),  
 ]

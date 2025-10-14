@@ -28,7 +28,7 @@
           </div>
     </div>
     <div class="logo"> 
-      <a href="/" id="link_logo">
+      <a href="/introduction" id="link_logo">
         <img id="logo-image" src="{% static 'images/logo.png' %}" alt="Logo FITMARK">
         <img id="logo-text" src="{% static 'images/fitmark-text.png' %}" alt="fitmark-text">
       </a>
@@ -52,20 +52,29 @@
 
           <!-- Conteúdo do Login  com back-->
            <div id="login-form">
-            <form id="login-form" method="POST" action="{% url 'login' %}">
+            <form id="login-form_orm" method="POST" action="{% url 'login' %}">
               {% csrf_token %}
               <img src="{% static 'images/fitmark-text.png' %}" alt="fitmark-text" width="100px"
                 style="display: block; margin: 0 0 10px 0px;">
               <h2 class="form-title">LOGIN</h2>
-              <input type="text" name="username" placeholder="Usuário ou Email" required>
+              <input type="text" name="username" placeholder="Usuário ou Email" required
+       value="{{ username_value|default:'' }}">
               <input type="password" name="password" placeholder="Senha" required>
+
+              {% if error %}
+
+              <div id="login-error-message" style="color:red; text-align:center; margin-top:10px;">
+                <p style="color: red;">{{ error }}</p>
+              </div>
+              {% endif %}
+
               <button type="submit">Entrar</button>
               <p>Não tem conta? <a href="#" id="switch-to-signin"><strong>Cadastre-se</strong></a></p>
             </form>
           </div>
 
           <div id="signin-form" style="display: none;">
-            <form id="register-form" method="POST" action="{% url 'register' %}">
+            <form id="register-form_orm" method="POST" action="{% url 'register' %}">
               {% csrf_token %}
               
               <img src="{% static 'images/fitmark-text.png' %}" alt="fitmark-text" width="100px"
@@ -77,7 +86,11 @@
               <input type="email" name="email" placeholder="Email" required>
               <input type="password" name="password1" placeholder="Senha" required>
               <input type="password" name="password2" placeholder="Confirmar senha" required>
-              
+
+              {% if error %}
+                <p style="color: red;">{{ error }}</p>
+              {% endif %}
+
               <button type="submit">Criar conta</button>
               <p>Já tem conta? <a href="#" id="switch-to-login"><strong>Login</strong></a></p>
             </form>
@@ -123,6 +136,8 @@
 </footer>
 </body>
 <script>
+
+  
 // dropdown
 const dropdownBtn = document.querySelector(".dropdown-btn");
 const dropdownContent = document.querySelector(".dropdown-content");
@@ -205,6 +220,54 @@ window.addEventListener("click", (e) => {
                                   
                                   lastScrollY = window.scrollY;
                                 });
+
+                                document.addEventListener('DOMContentLoaded', () => {
+                                {% if open_login_modal %}
+                                  modal.style.display = "flex";
+                                  loginForm.style.display = "block";
+                                  signinForm.style.display = "none";
+                                {% endif %}
+
+                                {% if open_register_modal %}
+                                  modal.style.display = "flex";
+                                  loginForm.style.display = "none";
+                                  signinForm.style.display = "block";
+                                {% endif %}
+                              });
+
+// Função para sumir a mensagem com fade out
+function fadeOutMessage(element, duration = 500) {
+  if (!element) return;
+  element.style.transition = `opacity ${duration}ms`;
+  element.style.opacity = 1;
+
+  setTimeout(() => {
+    element.style.opacity = 0;
+    setTimeout(() => {
+      element.remove();
+    }, duration);
+  }, 5000); // 5000ms = 5 segundos
+}
+
+// Aplica fade out na mensagem de login
+const loginErrorMessage = document.getElementById('login-error-message');
+fadeOutMessage(loginErrorMessage);
+
+// Também remove a mensagem ao trocar de modal
+const switchToSignin2 = document.getElementById("switch-to-signin");
+const switchToLogin2 = document.getElementById("switch-to-login");
+
+[switchToSignin2, switchToLogin2].forEach(btn => {
+  btn.addEventListener("click", () => {
+    if (loginErrorMessage) loginErrorMessage.remove();
+  });
+});
+
+// Remove a mensagem ao fechar o modal
+const closeBtn2 = document.querySelector(".close");
+closeBtn2.addEventListener("click", () => {
+  if (loginErrorMessage) loginErrorMessage.remove();
+});
 
 </script>
   {% block extra_script %}{% endblock %}
@@ -447,7 +510,11 @@ body {
                 border-radius: 6px;
                 cursor: pointer;
               }
-
+              .modal-content button:hover {
+                background-color: #ff5757;
+                color: rgb(0, 0, 0);
+               
+              }
               .modal-content a {
                 color: #ff0000;
                 cursor: pointer;

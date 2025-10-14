@@ -13,6 +13,9 @@ def parceria(request):
 
 def sobre(request):
     return render(request, 'introduction/sobre.html')
+def logout_view(request):
+    logout(request)
+    return redirect('introduction_home')
 
 def login_view(request):
     if request.method == 'POST':
@@ -23,36 +26,44 @@ def login_view(request):
         if user is not None:
             login(request, user)
             messages.success(request, 'Login realizado com sucesso!')
-            return redirect('home')  # ou a página que você quiser
+            return redirect('home')
         else:
-            messages.error(request, 'Usuário ou senha incorretos.')
-            return redirect('home')  # recarrega a página base (com modal)
-    return redirect('home')
+            context = {
+                "error": "Usuário ou senha incorretos.",
+                "username_value": username,
+                "open_login_modal": True  # <--- aqui diz pro template abrir o modal
+            }
+            return render(request, "introduction/home.html", context)
 
-def logout_view(request):
-    logout(request)
-    return redirect('home')
 
 def register_view(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        password1 = request.POST.get('password1')
-        password2 = request.POST.get('password2')
+    if request.method == "POST":
+        username = request.POST.get("username")
+        email = request.POST.get("email")
+        password1 = request.POST.get("password1")
+        password2 = request.POST.get("password2")
 
-        # validações básicas
+        context = {"username": username, "email": email}
+
+        # Senhas não conferem
         if password1 != password2:
-            messages.error(request, 'As senhas não coincidem.')
-            return redirect('home')
+            context["error"] = "As senhas não conferem."
+            return render(request, "register.html", context)
 
+        # Usuário já existe
         if User.objects.filter(username=username).exists():
-            messages.error(request, 'Usuário já existe.')
-            return redirect('home')
+            context["error"] = "Conta já existente."
+            return render(request, "register.html", context)
 
-        # cria o usuário
+        # Criar usuário
         user = User.objects.create_user(username=username, email=email, password=password1)
         user.save()
-        messages.success(request, 'Conta criada com sucesso! Faça login.')
-        return redirect('home')
 
-    return redirect('home')
+        # Autenticar e redirecionar para home
+        login(request, user)
+        return redirect("home")
+
+    return render(request, "register.html")
+
+def erro_login(request):
+    return render(request, 'introduction/error/login_error.html')

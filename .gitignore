@@ -1,0 +1,22 @@
+# Byte-compiled / Python cache
+__pycache__/
+*.py[cod]
+
+# Arquivos temporários do Django
+*.log
+*.sqlite3
+*.sqlite3-journal
+
+# Cache de templates
+*.pyc
+*.pyo
+*.pyd
+
+# IDEs (opcional, mas recomendado)
+.vscode/
+.idea/
+
+# Ambiente virtual
+venv/
+ENV/
+env/
