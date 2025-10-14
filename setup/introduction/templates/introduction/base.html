@@ -50,31 +50,49 @@
         <div class="modal-content">
           <span class="close">&times;</span>
 
-          <!-- Conteúdo do Login / Sign-in -->
-          <div id="login-form">
-            <img src="{% static 'images/fitmark-text.png' %}" alt="fitmark-text" width="100px" 
-              style="display: block; margin: 0 0 10px 0px;">
-            <h2 class="form-title">LOGIN</h2>
-            <input type="email" placeholder="Email">
-            <input type="password" placeholder="Senha">
-            <button>Entrar</button>
-            <p>Não tem conta? <a href="#" id="switch-to-signin"><strong>Cadastre-se</strong></a></p>
+          <!-- Conteúdo do Login  com back-->
+           <div id="login-form">
+            <form id="login-form" method="POST" action="{% url 'login' %}">
+              {% csrf_token %}
+              <img src="{% static 'images/fitmark-text.png' %}" alt="fitmark-text" width="100px"
+                style="display: block; margin: 0 0 10px 0px;">
+              <h2 class="form-title">LOGIN</h2>
+              <input type="text" name="username" placeholder="Usuário ou Email" required>
+              <input type="password" name="password" placeholder="Senha" required>
+              <button type="submit">Entrar</button>
+              <p>Não tem conta? <a href="#" id="switch-to-signin"><strong>Cadastre-se</strong></a></p>
+            </form>
           </div>
 
           <div id="signin-form" style="display: none;">
-            <img src="{% static 'images/fitmark-text.png' %}" alt="fitmark-text" width="100px" 
-              style="display: block; margin: 0 0 10px 0px;">
-            <h2 class="form-title">CADASTRE-SE</h2>
-            <input type="text" placeholder="Nome">
-            <input type="email" placeholder="Email">
-            <input type="password" placeholder="Senha">
-            <button>Criar conta</button>
-            <p>Já tem conta? <a href="#" id="switch-to-login"><strong>Login</strong></a></p>
+            <form id="register-form" method="POST" action="{% url 'register' %}">
+              {% csrf_token %}
+              
+              <img src="{% static 'images/fitmark-text.png' %}" alt="fitmark-text" width="100px"
+                style="display: block; margin: 0 0 10px 0px;">
+                
+              <h2 class="form-title">CADASTRE-SE</h2>
+              
+              <input type="text" name="username" placeholder="Nome" required>
+              <input type="email" name="email" placeholder="Email" required>
+              <input type="password" name="password1" placeholder="Senha" required>
+              <input type="password" name="password2" placeholder="Confirmar senha" required>
+              
+              <button type="submit">Criar conta</button>
+              <p>Já tem conta? <a href="#" id="switch-to-login"><strong>Login</strong></a></p>
+            </form>
           </div>
-
-  </div>
-</div>
-      
+          
+      {% if messages %}
+        <script>
+          {% for message in messages %}
+            alert('{{ message }}');
+          {% endfor %}
+        </script>
+      {% endif %}
+        </div>
+      </div>
+            
 
   </header>
 
