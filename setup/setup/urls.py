@@ -26,7 +26,7 @@ urlpatterns = [
 
     # publicas
     path('admin/', admin.site.urls),
-    path('introduction/', views.home, name='introduction_home'),
+    path('introduction/', views.home_introduction, name='introduction_home'),
     path('parceria/', views.parceria, name='parceria'),
     path('sobre/', views.sobre, name='sobre'),
     path('login/', views.login_view, name='login'),

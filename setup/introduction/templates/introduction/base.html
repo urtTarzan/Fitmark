@@ -61,10 +61,10 @@
        value="{{ username_value|default:'' }}">
               <input type="password" name="password" placeholder="Senha" required>
 
-              {% if error %}
+              {% if error_login %}
 
               <div id="login-error-message" style="color:red; text-align:center; margin-top:10px;">
-                <p style="color: red;">{{ error }}</p>
+                <p style="color: red;">{{ error_login }}</p>
               </div>
               {% endif %}
 
@@ -82,13 +82,22 @@
                 
               <h2 class="form-title">CADASTRE-SE</h2>
               
-              <input type="text" name="username" placeholder="Nome" required>
-              <input type="email" name="email" placeholder="Email" required>
-              <input type="password" name="password1" placeholder="Senha" required>
+              <input type="text" name="username" placeholder="Nome" required value="{{ username_value|default:'' }}">
+              <input type="email" name="email" placeholder="Email" required value="{{ email_value|default:'' }}">
+              <div class="password-field">
+                <input type="password" name="password1" id="password1" placeholder="Senha" required value="{{ password_1|default:'' }}">
+                <span id="toggle-password" class="password-eye">
+                  <img src="{% static 'images/eye-open.png' %}" alt="Mostrar senha">
+                </span>
+              </div>
+              <div id="password-strength">
+                <div id="password-strength-bar"></div>
+              </div>
+              <small id="password-strength-text"></small>
               <input type="password" name="password2" placeholder="Confirmar senha" required>
 
-              {% if error %}
-                <p style="color: red;">{{ error }}</p>
+              {% if error_register %}
+                <p style="color: red;">{{ error_register }}</p>
               {% endif %}
 
               <button type="submit">Criar conta</button>
@@ -236,6 +245,14 @@ window.addEventListener("click", (e) => {
                               });
 
 // Função para sumir a mensagem com fade out
+function closeModal(modalId) {
+  const modal = document.getElementById(modalId);
+  if (modal) {
+    modal.style.display = "none";
+  }
+}
+
+// ---------- FADE OUT DA MENSAGEM ----------
 function fadeOutMessage(element, duration = 500) {
   if (!element) return;
   element.style.transition = `opacity ${duration}ms`;
@@ -246,14 +263,14 @@ function fadeOutMessage(element, duration = 500) {
     setTimeout(() => {
       element.remove();
     }, duration);
-  }, 5000); // 5000ms = 5 segundos
+  }, 5000); // 5 segundos
 }
 
 // Aplica fade out na mensagem de login
 const loginErrorMessage = document.getElementById('login-error-message');
 fadeOutMessage(loginErrorMessage);
 
-// Também remove a mensagem ao trocar de modal
+// Remove a mensagem ao trocar de modal
 const switchToSignin2 = document.getElementById("switch-to-signin");
 const switchToLogin2 = document.getElementById("switch-to-login");
 
@@ -269,6 +286,69 @@ closeBtn2.addEventListener("click", () => {
   if (loginErrorMessage) loginErrorMessage.remove();
 });
 
+// ---------- ABRIR MODAL DE LOGIN OU REGISTER ----------
+// Aqui você checa a variável que indica qual modal abrir
+if (window.open_login_modal) {
+  openModal("login-modal"); // id do seu modal de login
+} else if (window.open_register_modal) {
+  openModal("register-modal"); // id do seu modal de registro
+}
+
+// ---------- BOTÕES PARA TROCAR MODAL (EXEMPLO) ----------
+switchToSignin2.addEventListener("click", () => {
+  closeModal("login-modal");
+  openModal("register-modal");
+});
+
+switchToLogin2.addEventListener("click", () => {
+  closeModal("register-modal");
+  openModal("login-modal");
+});
+        //  barrinha_senha
+
+          const passwordInput = document.getElementById("password1");
+          const strengthBar = document.getElementById("password-strength-bar");
+          const strengthText = document.getElementById("password-strength-text");
+
+          passwordInput.addEventListener("input", () => {
+            const val = passwordInput.value;
+            let score = 0;
+
+            // Critérios de força
+            if (val.length >= 8) score += 1;
+            if (/[A-Z]/.test(val)) score += 1;
+            if (/[a-z]/.test(val)) score += 1;
+            if (/\d/.test(val)) score += 1;
+            if (/[@$!%*?&]/.test(val)) score += 1;
+
+            // Define largura e cor da barra
+            let width = (score / 5) * 100;
+            strengthBar.style.width = width + "%";
+
+            if (score <= 2) {
+              strengthBar.style.backgroundColor = "red";
+              strengthText.textContent = "Senha fraca";
+            } else if (score === 3 || score === 4) {
+              strengthBar.style.backgroundColor = "orange";
+              strengthText.textContent = "Senha média";
+            } else if (score === 5) {
+              strengthBar.style.backgroundColor = "darkgreen";
+              strengthText.textContent = "Senha forte";
+            }
+          });
+
+              //  olho senha
+              const togglePassword = document.getElementById("toggle-password").querySelector("img");
+
+              document.getElementById("toggle-password").addEventListener("click", () => {
+                if (passwordInput.type === "password") {
+                  passwordInput.type = "text";
+                  togglePassword.src = "{% static 'images/eye-closed.png' %}";
+                } else {
+                  passwordInput.type = "password";
+                  togglePassword.src = "{% static 'images/eye-open.png' %}";
+                }
+              });
 </script>
   {% block extra_script %}{% endblock %}
   {% block extra_style %}{% endblock %}
@@ -587,5 +667,60 @@ body {
                           border-top: 1px solid #444;
                           padding-top: 10px;
                         }
+/* senha barra */
+
+.password-field {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+#password-strength {
+  width: 100%;
+  height: 5px;
+  background-color: #e0e0e0;
+  margin-top: 5px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+#password-strength-bar {
+  width: 0%;
+  height: 100%;
+  background-color: red;
+  transition: width 0.3s, background-color 0.3s;
+}
+
+#password-strength-text {
+  font-size: 12px;
+  margin-top: 2px;
+  display: block;
+  color: #555;
+}
+        /* olho senha */
+        .password-field {
+          position: relative;
+          margin-bottom: 10px;
+        }
+
+        .password-field input {
+          width: 100%;
+          padding-right: 40px; /* espaço para o ícone dentro do input */
+          box-sizing: border-box;
+        }
+
+        .password-eye {
+          position: absolute;
+          right: 10px;
+          top: 50%;
+          transform: translateY(-50%);
+          cursor: pointer;
+        }
+
+        .password-eye img {
+          width: 25px;
+          height: 20px;
+        }
+        
+
 </style>
 </html>

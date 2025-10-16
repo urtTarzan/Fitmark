@@ -2,10 +2,12 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
+import re
 # Create your views here.
 
-def home(request):
+def home_introduction(request):
     return render(request, 'introduction/home.html')
 
 def parceria(request):
@@ -29,7 +31,7 @@ def login_view(request):
             return redirect('home')
         else:
             context = {
-                "error": "Usuário ou senha incorretos.",
+                "error_login": "Usuário ou senha incorretos.",
                 "username_value": username,
                 "open_login_modal": True  # <--- aqui diz pro template abrir o modal
             }
@@ -43,27 +45,65 @@ def register_view(request):
         password1 = request.POST.get("password1")
         password2 = request.POST.get("password2")
 
-        context = {"username": username, "email": email}
+        # Contexto base — mantém nome, e-mail e senha já digitados
+        context = {
+            "username_value": username,
+            "email_value": email,
+            "password_1": password1,
+            "open_register_modal": True
+        }
 
-        # Senhas não conferem
+        # 1️⃣ Senhas não conferem
         if password1 != password2:
-            context["error"] = "As senhas não conferem."
-            return render(request, "register.html", context)
+            context["error_register"] = "As senhas não conferem."
+            return render(request, "introduction/home.html", context)
 
-        # Usuário já existe
+        # 2️⃣ E-mail inválido
+        try:
+            validate_email(email)
+        except ValidationError:
+            context["error_register"] = "E-mail inválido. Insira um e-mail completo (ex: nome@dominio.com)."
+            return render(request, "introduction/home.html", context)
+
+        # 3️⃣ Nome de usuário inválido
+        if not re.match(r"^[a-zA-Z0-9_]+$", username):
+            context["error_register"] = "O nome de usuário só pode conter letras, números e _."
+            return render(request, "introduction/home.html", context)
+
+        # 4️⃣ Validação de senha forte
+        if len(password1) < 8:
+            context["error_register"] = "A senha deve ter pelo menos 8 caracteres."
+            return render(request, "introduction/home.html", context)
+
+        if not re.search(r"[A-Z]", password1):
+            context["error_register"] = "A senha deve conter pelo menos uma letra maiúscula."
+            return render(request, "introduction/home.html", context)
+
+        if not re.search(r"[a-z]", password1):
+            context["error_register"] = "A senha deve conter pelo menos uma letra minúscula."
+            return render(request, "introduction/home.html", context)
+
+        if not re.search(r"\d", password1):
+            context["error_register"] = "A senha deve conter pelo menos um número."
+            return render(request, "introduction/home.html", context)
+
+        if not re.search(r"[@$!%*?&]", password1):
+            context["error_register"] = "A senha deve conter pelo menos um caractere especial (@, $, !, %, *, ?, &)."
+            return render(request, "introduction/home.html", context)
+
         if User.objects.filter(username=username).exists():
-            context["error"] = "Conta já existente."
-            return render(request, "register.html", context)
+            context["error_register"] = "Nome de usuário já existe."
+            return render(request, "introduction/home.html", context)
 
-        # Criar usuário
-        user = User.objects.create_user(username=username, email=email, password=password1)
-        user.save()
-
-        # Autenticar e redirecionar para home
+        # 4️⃣ E-mail já existe
+        if User.objects.filter(email=email).exists():
+            context["error_register"] = "E-mail já cadastrado em outra conta."
+            return render(request, "introduction/home.html", context)
+        # 6️⃣ Autenticar e redirecionar
         login(request, user)
         return redirect("home")
 
-    return render(request, "register.html")
+    return render(request, "introduction/home.html")
 
 def erro_login(request):
     return render(request, 'introduction/error/login_error.html')

@@ -5,9 +5,9 @@ class LoginRequiredMiddleware:
     Protege todas as páginas exceto login, cadastro e erro.
     """
     PUBLIC_PATHS = [
-        '/', '/login/', '/cadastro/', '/erro-login/', '/admin/', 
-        '/introduction/', '/parceria/', '/sobre/'
-    ]
+    '/', '/login/', '/cadastro/', '/register/', '/erro-login/',
+    '/admin/', '/introduction/', '/parceria/', '/sobre/'
+]
 
     def __init__(self, get_response):
         self.get_response = get_response
