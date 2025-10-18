@@ -15,9 +15,6 @@ def parceria(request):
 
 def sobre(request):
     return render(request, 'introduction/sobre.html')
-def logout_view(request):
-    logout(request)
-    return redirect('introduction_home')
 
 def login_view(request):
     if request.method == 'POST':
@@ -44,9 +41,7 @@ def register_view(request):
         email = request.POST.get("email")
         password1 = request.POST.get("password1")
         password2 = request.POST.get("password2")
-        user = authenticate(request, username=username,)
 
-        # Contexto base — mantém nome, e-mail e senha já digitados
         context = {
             "username_value": username,
             "email_value": email,
@@ -54,53 +49,54 @@ def register_view(request):
             "open_register_modal": True
         }
 
-        # 1️⃣ Senhas não conferem
+        # 1️⃣ Validações
         if password1 != password2:
             context["error_register"] = "As senhas não conferem."
             return render(request, "introduction/home.html", context)
 
-        # 2️⃣ E-mail inválido
         try:
             validate_email(email)
         except ValidationError:
-            context["error_register"] = "E-mail inválido. Insira um e-mail completo (ex: nome@dominio.com)."
+            context["error_register"] = "E-mail inválido."
             return render(request, "introduction/home.html", context)
 
-        # 3️⃣ Nome de usuário inválido
         if not re.match(r"^[a-zA-Z0-9_]+$", username):
-            context["error_register"] = "O nome de usuário só pode conter letras, números e _."
+            context["error_register"] = "Nome de usuário só pode conter letras, números e _."
             return render(request, "introduction/home.html", context)
 
-        # 4️⃣ Validação de senha forte
         if len(password1) < 8:
             context["error_register"] = "A senha deve ter pelo menos 8 caracteres."
             return render(request, "introduction/home.html", context)
 
         if not re.search(r"[A-Z]", password1):
-            context["error_register"] = "A senha deve conter pelo menos uma letra maiúscula."
+            context["error_register"] = "A senha deve conter uma letra maiúscula."
             return render(request, "introduction/home.html", context)
 
         if not re.search(r"[a-z]", password1):
-            context["error_register"] = "A senha deve conter pelo menos uma letra minúscula."
+            context["error_register"] = "A senha deve conter uma letra minúscula."
             return render(request, "introduction/home.html", context)
 
         if not re.search(r"\d", password1):
-            context["error_register"] = "A senha deve conter pelo menos um número."
+            context["error_register"] = "A senha deve conter um número."
             return render(request, "introduction/home.html", context)
 
         if not re.search(r"[@$!%*?&]", password1):
-            context["error_register"] = "A senha deve conter pelo menos um caractere especial (@, $, !, %, *, ?, &)."
+            context["error_register"] = "A senha deve conter um caractere especial."
             return render(request, "introduction/home.html", context)
 
         if User.objects.filter(username=username).exists():
             context["error_register"] = "Nome de usuário já existe."
             return render(request, "introduction/home.html", context)
 
-        # 4️⃣ E-mail já existe
         if User.objects.filter(email=email).exists():
-            context["error_register"] = "E-mail já cadastrado em outra conta."
+            context["error_register"] = "E-mail já cadastrado."
             return render(request, "introduction/home.html", context)
-        # 6️⃣ Autenticar e redirecionar
+
+        # ✅ Agora sim: cria o usuário
+        user = User.objects.create_user(username=username, email=email, password=password1)
+        user.save()
+
+        # ✅ Faz login automático
         login(request, user)
         return redirect("home")
 
