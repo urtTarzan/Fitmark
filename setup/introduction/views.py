@@ -44,6 +44,7 @@ def register_view(request):
         email = request.POST.get("email")
         password1 = request.POST.get("password1")
         password2 = request.POST.get("password2")
+        user = authenticate(request, username=username,)
 
         # Contexto base — mantém nome, e-mail e senha já digitados
         context = {
