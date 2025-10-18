@@ -105,15 +105,6 @@
             </form>
           </div>
           
-      {% if messages %}
-        <script>
-          {% for message in messages %}
-            alert('{{ message }}');
-          {% endfor %}
-        </script>
-      {% endif %}
-        </div>
-      </div>
             
 
   </header>
@@ -286,56 +277,47 @@ closeBtn2.addEventListener("click", () => {
   if (loginErrorMessage) loginErrorMessage.remove();
 });
 
-// ---------- ABRIR MODAL DE LOGIN OU REGISTER ----------
-// Aqui você checa a variável que indica qual modal abrir
-if (window.open_login_modal) {
-  openModal("login-modal"); // id do seu modal de login
-} else if (window.open_register_modal) {
-  openModal("register-modal"); // id do seu modal de registro
-}
-
-// ---------- BOTÕES PARA TROCAR MODAL (EXEMPLO) ----------
-switchToSignin2.addEventListener("click", () => {
-  closeModal("login-modal");
-  openModal("register-modal");
-});
-
-switchToLogin2.addEventListener("click", () => {
-  closeModal("register-modal");
-  openModal("login-modal");
-});
         //  barrinha_senha
 
-          const passwordInput = document.getElementById("password1");
-          const strengthBar = document.getElementById("password-strength-bar");
-          const strengthText = document.getElementById("password-strength-text");
+        const passwordInput = document.getElementById("password1");
+        const strengthBar = document.getElementById("password-strength-bar");
+        const strengthText = document.getElementById("password-strength-text");
 
-          passwordInput.addEventListener("input", () => {
-            const val = passwordInput.value;
-            let score = 0;
+        function updateStrength() {
+          const val = passwordInput.value;
+          let score = 0;
 
-            // Critérios de força
-            if (val.length >= 8) score += 1;
-            if (/[A-Z]/.test(val)) score += 1;
-            if (/[a-z]/.test(val)) score += 1;
-            if (/\d/.test(val)) score += 1;
-            if (/[@$!%*?&]/.test(val)) score += 1;
+          // Critérios de força
+          if (val.length >= 8) score += 1;
+          if (/[A-Z]/.test(val)) score += 1;
+          if (/[a-z]/.test(val)) score += 1;
+          if (/\d/.test(val)) score += 1;
+          if (/[@$!%*?&]/.test(val)) score += 1;
 
-            // Define largura e cor da barra
-            let width = (score / 5) * 100;
-            strengthBar.style.width = width + "%";
+          // Define largura e cor da barra
+          let width = (score / 5) * 100;
+          strengthBar.style.width = width + "%";
 
-            if (score <= 2) {
-              strengthBar.style.backgroundColor = "red";
-              strengthText.textContent = "Senha fraca";
-            } else if (score === 3 || score === 4) {
-              strengthBar.style.backgroundColor = "orange";
-              strengthText.textContent = "Senha média";
-            } else if (score === 5) {
-              strengthBar.style.backgroundColor = "darkgreen";
-              strengthText.textContent = "Senha forte";
-            }
-          });
+          if (score <= 2) {
+            strengthBar.style.backgroundColor = "red";
+            strengthText.textContent = "Senha fraca";
+          } else if (score === 3 || score === 4) {
+            strengthBar.style.backgroundColor = "orange";
+            strengthText.textContent = "Senha média";
+          } else if (score === 5) {
+            strengthBar.style.backgroundColor = "darkgreen";
+            strengthText.textContent = "Senha forte";
+          } else {
+            strengthBar.style.backgroundColor = "transparent";
+            strengthText.textContent = "";
+          }
+        }
+
+        // Atualiza ao digitar
+        passwordInput.addEventListener("input", updateStrength);
+
+        // 🔥 Atualiza automaticamente ao carregar a página
+        window.addEventListener("load", updateStrength);
 
               //  olho senha
               const togglePassword = document.getElementById("toggle-password").querySelector("img");

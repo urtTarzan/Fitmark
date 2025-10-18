@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from introduction import views
-from principal.views import home
+from principal.views import home,logout_view
 from django.shortcuts import redirect
 
 urlpatterns = [
@@ -30,7 +30,6 @@ urlpatterns = [
     path('parceria/', views.parceria, name='parceria'),
     path('sobre/', views.sobre, name='sobre'),
     path('login/', views.login_view, name='login'),
-    path('logout/', views.logout_view, name='logout'),
     path('register/', views.register_view, name='register'),  
 
     # erro
@@ -38,4 +37,13 @@ urlpatterns = [
 
     # login necessario
     path('home/', home, name='home'),  
+    path("logout/", logout_view, name="logout"),
 ]
+
+
+from django.conf.urls import handler404
+
+def redirecionar_404(request, exception):
+    return redirect('introduction_home')
+
+handler404 = 'setup.urls.redirecionar_404'
