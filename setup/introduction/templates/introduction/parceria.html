@@ -34,6 +34,7 @@ Parceria
 
   <div class="carousel">
     <div class="carousel-track">
+      <!-- original -->
       <img src="{% static 'images/suplementosgrow.jpg' %}" alt="Parceiro 1">
       <img src="{% static 'images/fila.jpg' %}" alt="Parceiro 2">
       <img src="{% static 'images/blackskull.jpg' %}" alt="Parceiro 3">
@@ -42,7 +43,7 @@ Parceria
       <img src="{% static 'images/redbull.jpg' %}" alt="Parceiro 6">
       <img src="{% static 'images/puma.jpg' %}" alt="Parceiro 7">
 
-      <!-- duplicados para loop -->
+      <!-- duplicadas para loop infinito -->
       <img src="{% static 'images/suplementosgrow.jpg' %}" alt="Parceiro 1">
       <img src="{% static 'images/fila.jpg' %}" alt="Parceiro 2">
       <img src="{% static 'images/blackskull.jpg' %}" alt="Parceiro 3">
@@ -96,6 +97,10 @@ Parceria
   src: url("{% static 'fonts/BebasNeue-Regular.ttf' %}") format('truetype');
 }
 
+  @font-face {
+    font-family: 'Vietnam';
+    src: url( "{% static 'fonts/BeVietnamPro-Regular.ttf' %}") format('truetype');
+  }
 /* --- GERAL --- */
 .hero-title {
   font-family: 'Vampire Wars';
@@ -171,13 +176,15 @@ Parceria
 .parceria-sobre .texto {
   flex: 2;
   padding: 20px;
-  font-size: 25px;
+  font-size: 22px;
+  font-family: 'Vietnam', sans-serif;
 }
 
 /* CARROSSEL */
 .parceria-carrossel {
   text-align: center;
   padding: 50px 20px;
+  font-family: 'Vietnam', sans-serif;
 }
 .carousel {
   overflow: hidden;
@@ -219,7 +226,8 @@ Parceria
   list-style: disc;
   text-align: left;
   padding-left: 20px;
-  font-size: 25px;
+  font-size: 23px;
+  font-family: 'Vietnam', sans-serif;
 }
 .beneficios-container img {
   flex: 1;
@@ -233,6 +241,7 @@ Parceria
 .parceria-tipos {
   text-align: center;
   padding: 60px 20px;
+  font-family: 'Vietnam', sans-serif;
 }
 .tipos-container {
   display: flex;
@@ -282,7 +291,7 @@ Parceria
   .tipo-card { width: 80%; height: 300px; }
 }
 @media (max-width: 480px) {
-  .parceria-hero { height: 350px; }
+  .parceria-hero { height: 350px; } 
   .hero-title { font-size: 22px; }
   .btn-hero { font-size: 13px; padding: 8px 18px; }
   .section-title { font-size: 20px; }
@@ -293,4 +302,6 @@ Parceria
   .tipo-overlay { font-size: 18px; }
 }
 </style>
+
+
 {% endblock %}

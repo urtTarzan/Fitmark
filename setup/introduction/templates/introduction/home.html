@@ -1,4 +1,3 @@
-
 {% extends "introduction/base.html" %}
 
 {% load static %}
@@ -7,17 +6,58 @@
 <link href="https://fonts.googleapis.com/css2?family=Alan+Sans:wght@300..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 {% endblock %}
 
+{% block title %}home{% endblock %}
+
+{% block content %}
+<!-- HTML / Estrutura -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>MERGULHE EM UM<br>ESTILO DE VIDA FITNESS</h1>
+    <button class="hero-btn">Vamos lá!</button>
+  </div>
+</section>
+
+<section id="fit_e">
+  <div class="main-text">
+    Fit <span id="type" class="typewriter"></span>
+  </div>
+  <div class="underline" id="underline"></div>
+
+  <div class="fit-content" id="content">
+    <div class="description" id="desc">fitmark</div>
+    <img id="img" src="{% static 'images/fite_e1.png' %}" alt="Imagem ilustrativa">
+  </div>
+</section>
+
+<section class="section-parceiria">
+  <div class="parceiria-container">
+    <div class="parceiria-img">
+      <img src="{% static 'images/parceiria.png' %}" alt="Programa de Parceiria">
+    </div>
+    <div class="parceiria-content">
+      <h2>PROGRAMA DE PARCERIA</h2>
+      <p>
+        A Fitmark agora está com um novo programa de parceiros no qual remunera 
+        e destaca influenciadores ou marcas que aderirem no programa
+      </p>
+      <a href="/parceria" class="btn">SABER MAIS</a>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
 {% block extra_style %}
 <style>
+  /* CSS / Estilos */
   @font-face {
     font-family: 'Vampire Wars';
     src: url("{% static 'fonts/Vampire_Wars.otf' %}") format('opentype');
     font-weight: normal;
     font-style: normal;
-}
-  #opa{
-    height: 60px; /* altura do header */
   }
+
+  #opa { height: 60px; }
+
   /* Hero */
   .hero {
     display: flex;
@@ -58,677 +98,279 @@
     transform: scale(1.05);
   }
 
-            /* Fit é ... */
-          #fit_e {
-        background-color: #ffffff;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        padding: 20px;
-      }
-      .main-text { font-size: clamp(28px, 5vw, 48px); font-weight: bold; position: relative; display: inline-block; margin-bottom: 10px; text-align: center; font-family: 'Poppins', sans-serif; font-weight: 800px; font-size: 7vw; font-family: "Vampire Wars", sans-serif; font-weight: 200; } .main-text .typewriter { border-right: 2px solid #0f172a; padding-right: 4px; white-space: nowrap; overflow: hidden; vertical-align: bottom; } .underline { height: 4px; background-color: #0f172a; width: 0; margin: 0 auto 20px auto; transition: width 0.5s ease; }
-
-      .fit-content {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        max-width: 900px;
-        opacity: 0;
-        transform: translateX(-20px);
-        transition: all 0.5s ease;
-        gap: 20px;
-        flex-wrap: wrap;
-      }
-
-      .fit-content.show {
-        opacity: 1;
-        transform: translateX(0);
-      }
-
-      .fit-content .description {
-        flex: 1;
-        font-size: clamp(14px, 2vw, 18px);
-        line-height: 1.5;
-        font-size: 1.5vw;
-        font-family: poppins, sans-serif;
-      }
-
-      .fit-content img {
-        max-width: 300px;
-        width: 100%;
-        height: auto;
-        border-radius: 8px;
-        flex-shrink: 0;
-      }
-
-      @media (max-width: 768px) {
-        .fit-content {
-          flex-direction: column;
-          text-align: center;
-          padding: 0 20px;
-        }
-
-        .fit-content .description {
-          margin-bottom: 20px;
-          padding: 0 5px;
-          font-size: 16px;
-          line-height: 1.6;
-        }
-      }
-
-
-      section-compra {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 40px;
-        background-color: #e5e5e5;
-        border-radius: 8px;
-        height: 600px;
-      }
-
-      .compra-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 80%;
-        max-width: 900px;
-      }
-
-      .compra-texto-fixo {
-        font-size: 18px;
-        font-weight: bold;
-        background: #8CC63F;
-        color: #fff;
-        padding: 15px 25px;
-        border-radius: 8px;
-        text-align: center;
-        max-width: 320px;
-      }
-
-      .compra-imagem img {
-        width: 400px;
-        border-radius: 12px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      }
-
-      .compra-imagem {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-
-          /* Texto dinâmico */
-          .texto-dinamico {
-            font-size: 44px;
-            font-family: "Vampire Wars", sans-serif;
-            font-weight: 200;
-            color: #ff3b3b;
-            margin-bottom: 15px;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
-            
-            /* inicial */
-            opacity: 0;
-            transform: translateY(-15px);
-            transition: all 0.5s ease;
-          }
-
-          /* Imagem */
-          .compra-imagem img {
-            width: 400px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            
-            /* inicial */
-            opacity: 0;
-            transform: translateY(15px);
-            transition: all 0.5s ease;
-          }
-
-          /* Estado ativo - entrada */
-          .active {
-            opacity: 1 !important;
-            transform: translateY(0) !important;
-          }
-
-          /* Responsivo */
-          @media (max-width: 968px) {
-            .texto-dinamico {
-              font-size: 40px;
-              margin-bottom: 10px;
-            }
-            
-            .compra-imagem img {
-              width: 80%;
-            }
-          }
-                .compra-texto-fixo {
-                display: inline-block;
-                font-size: 18px;
-                font-weight: bold;
-                background: #8CC63F;
-                color: #fff;
-                padding: 15px 25px;
-                border-radius: 8px;
-                text-align: center;
-                cursor: pointer;
-                position: relative;
-                transition: all 0.3s ease;
-                z-index: 1;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
-              }
-
-              /* Aura branca giratória */
-              .compra-texto-fixo::before {
-                content: "";
-                position: absolute;
-                top: -5px;
-                left: -5px;
-                right: -5px;
-                bottom: -5px;
-                border-radius: 10px;
-                border: 2px solid rgba(255,255,255,0.5);
-                opacity: 0;
-                z-index: -1;
-                transition: all 0.5s ease;
-                animation: spin 2s linear infinite;
-              }
-
-              /* Hover: aumenta e mostra aura */
-              .compra-texto-fixo:hover {
-                transform: scale(1.1);
-                background-color: #a1d958;
-              }
-
-              .compra-texto-fixo:hover::before {
-                opacity: 1;
-              }
-
-              /* Responsivo */
-              @media (max-width: 768px) {
-                .compra-texto-fixo {
-                  font-size: 16px;
-                  padding: 12px 20px;
-                }
-              }
-                    /* Responsivo para celular */
-                  @media (max-width: 768px) {
-                    .compra-texto-fixo {
-                      display: none; /* remove o botão verde */
-                    }
-
-                    .compra-container {
-                      flex-direction: column; /* empilha o conteúdo */
-                      justify-content: center;
-                      align-items: center;
-                      gap: 15px; /* espaço entre texto e imagem */
-                    }
-
-                    .compra-imagem {
-                      width: 100%;
-                      display: flex;
-                      flex-direction: column;
-                      align-items: center;
-                      text-align: center;
-                    }
-
-
-                    .compra-imagem img {
-                      width: 80%; /* ocupa boa parte da tela */
-                      max-width: 350px;
-                    }
-                  }
-                         /* Comunidade */
-                    #content-comunidade {
-                      padding: 40px 20px;
-                      background: #ffffff;
-                      color: #000000;
-                      font-family: Inter, system-ui, Arial, sans-serif;
-                    }
-
-                    #content-comunidade h2 {
-                      text-align: center;
-                      font-size: 28px;
-                      margin-bottom: 10px;
-                      font-family: vampire wars, sans-serif;
-                      font-weight: 100;
-                    }
-
-                    #content-comunidade p.lead {
-                      text-align: center;
-                      color: #000000;
-                      margin-bottom: 30px;
-                    }
-
-                    .comunidade-grid {
-                      display: grid;
-                      grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
-                      gap: 18px;
-                      /* perspective removido */
-                    }
-
-                    .comunidade-card {
-                      background: #b6b6b6;
-                      border-radius: 12px;
-                      overflow: hidden;
-                      position: relative;
-                      display: flex;
-                      flex-direction: column;
-                      min-height: 220px;
-                      box-shadow: 0 6px 18px rgba(2,6,23,0.6);
-                      z-index: 1;
-                      /* transições removidas */
-                    }
-
-                    .comunidade-card .media {
-                      height: 120px;
-                      background-size: cover;
-                      background-position: center;
-                    }
-
-                    .comunidade-card .content {
-                      padding: 16px;
-                      display: flex;
-                      flex-direction: column;
-                      gap: 8px;
-                      flex: 1;
-                    }
-
-                    .comunidade-card h3 {
-                      margin:0;
-                      font-size:18px;
-                      color:#000000;
-                    }
-
-                    .comunidade-card p {
-                      margin:0;
-                      color:#000000;
-                      font-size:14px;
-                      line-height:1.4;
-                    }
-
-                    .badge {
-                      position:absolute;
-                      left:12px;
-                      top:12px;
-                      background: rgba(201, 201, 201, 0.04);
-                      padding:6px 10px;
-                      border-radius:999px;
-                      font-size:12px;
-                      color:#cfe7ff;
-                      /* backdrop-filter removido para melhorar performance */
-                    }
-
-                    /* Responsivo */
-                    @media(max-width:520px){
-                      #content-comunidade {
-                        padding:20px 10px;
-                      }
-                      .comunidade-card .media {
-                        height:100px;
-                      }
-                    }
-
-                    /* Fundo das imagens dos cards */
-                    .media.img1 { background-image: url("{% static 'images/comunidade1.jpg' %}"); }
-                    .media.img2 { background-image: url("{% static 'images/comunidade2.jpg' %}"); }
-                    .media.img3 { background-image: url("{% static 'images/comunidade3.jpg' %}"); }
-                    .media.img4 { background-image: url("{% static 'images/comunidade4.jpg' %}"); }
-
-/* Section Parceiria */
-.section-parceiria {
-  background: #f5f5f5;
-  padding:40px  20px;
-  font-family: Arial, sans-serif;
-}
-
-.parceiria-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  max-width: 1100px;
-  margin: 0 auto;
-  gap: 40px;
-}
-
-.parceiria-img img {
-  max-width: auto;
-  height: 500px;
-  margin-bottom:0px;
-}
-
-.parceiria-content {
-  max-width: 500px;
-}
-
-.parceiria-content h2 {
-  font-size: 38px;
-  font-weight: bold;
-  margin-bottom: 15px;
-  color: #000;
-}
-
-.parceiria-content p {
-  font-size: 20px;
-  color: #333;
-  margin-bottom: 20px;
-  line-height: 1.5;
-}
-
-.parceiria-content .btn {
-  background-color: #ff1a1a; /* vermelho vibrante */
-  color: white;
-  padding: 12px 25px;
-  border: none;
-  border-radius: 12px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 4px 15px rgba(255, 26, 26, 0.5); /* sombra vermelha suave */
-  transition: all 0.3s ease;
-  display: inline-block; /* garante visibilidade no mobile */
-  margin-top: 20px; /* espaço quando a tela for pequena */
-  text-decoration: none; /* remove sublinhado */
-}
-
-.parceiria-content .btn:hover {
-  background-color: #ff4d4d; /* fica mais claro */
-  box-shadow: 0 0 20px rgba(255, 26, 26, 0.8); /* glow vermelho */
-  transform: translateY(-2px); /* sobe um pouco */
-}
-
-/* Responsivo */
-@media (max-width: 768px) {
-  .parceiria-container {
+  /* Fit */
+  #fit_e {
+    background-color: #ffffff;
+    display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  .main-text {
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: bold;
+    position: relative;
+    display: inline-block;
+    margin-bottom: 10px;
     text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800px;
+    font-size: 7vw;
+    font-family: "Vampire Wars", sans-serif;
+    font-weight: 200;
   }
 
-  .parceiria-img {
-    display: none;
+  .main-text .typewriter {
+    border-right: 2px solid #0f172a;
+    padding-right: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    vertical-align: bottom;
   }
+
+  .underline {
+    height: 4px;
+    background-color: #0f172a;
+    width: 0;
+    margin: 0 auto 20px auto;
+    transition: width 0.5s ease;
+  }
+
+  .fit-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 900px;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.5s ease;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .fit-content.show {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .fit-content .description {
+    flex: 1;
+    font-size: clamp(14px, 2vw, 18px);
+    line-height: 1.5;
+    font-size: 1.5vw;
+    font-family: poppins, sans-serif;
+  }
+
+  .fit-content img {
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    .fit-content {
+      flex-direction: column;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .fit-content .description {
+      margin-bottom: 20px;
+      padding: 0 5px;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+  }
+
+  /* Section Parceiria */
+  .section-parceiria {
+    background: #f5f5f5;
+    padding: 40px 20px;
+    font-family: Arial, sans-serif;
+  }
+
+  .parceiria-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    gap: 40px;
+  }
+
+  .parceiria-img img {
+    max-width: auto;
+    height: 500px;
+    margin-bottom:0px;
+  }
+
+  .parceiria-content {
+    max-width: 500px;
+  }
+
+  .parceiria-content h2 {
+    font-size: 38px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #000;
+  }
+
+  .parceiria-content p {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
   .parceiria-content .btn {
-    display: inline-block; /* garante que o botão apareça */
+    background-color: #ff1a1a;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 26, 26, 0.5);
+    transition: all 0.3s ease;
+    display: inline-block;
     margin-top: 20px;
+    text-decoration: none;
   }
-}
-   
 
+  .parceiria-content .btn:hover {
+    background-color: #ff4d4d;
+    box-shadow: 0 0 20px rgba(255, 26, 26, 0.8);
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+    .parceiria-container {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .parceiria-img {
+      display: none;
+    }
+
+    .parceiria-content .btn {
+      display: inline-block;
+      margin-top: 20px;
+    }
+  }
 </style>
 {% endblock %}
 
-{% block title %}
-  home
-{% endblock %}
-
-{% block content %}
-  <section class="hero">
-  <div class="hero-content">
-    <h1>MERGULHE EM UM<br>ESTILO DE VIDA FITNESS</h1>
-    <button class="hero-btn">Vamos lá!</button>
-  </div>
-</section>
-
-
-<section id="fit_e">
-  <div class="main-text">
-    Fit <span id="type" class="typewriter"></span>
-  </div>
-  <div class="underline" id="underline"></div>
-
-  <!-- troquei "content" por "fit-content" -->
-  <div class="fit-content" id="content">
-    <div class="description" id="desc">fitmark</div>
-    <img id="img" src="{% static 'images/fite_e1.png' %}" alt="Imagem ilustrativa">
-  </div>
-</section>
-
-
-<section-compra>
-  <div class="compra-container">
-    <!-- Texto fixo (verde) -->
-    <div class="compra-texto-fixo">
-      ACOMPANHE OS MELHORES PREÇOS DO MERCADO
-    </div>
-
-    <!-- Texto dinâmico acima da imagem -->
-    <div class="compra-imagem">
-      <div class="texto-dinamico" id="texto-rotativo" style="position: static; margin-bottom: 10px; color: rgb(0, 158, 34); background: none; text-shadow: none;">Suplementos</div>
-      <img id="imagem-produto" src="{% static 'images/img1_compra.png' %}" alt="Produtos">
-    </div>
-  </div>
-</section-compra>
-
-
-
-<section id="content-comunidade">
-  <div class="comunidade-container">
-    <h2>Junte-se à comunidade</h2>
-    <p class="lead">Veja dicas, compartilhe experiências, fique por dentro das notícias e troque ideias com quem treina como você.</p>
-
-    <div class="comunidade-grid">
-      <article class="comunidade-card" role="article" aria-label="Veja dicas">
-        <div class="badge">1</div>
-        <div class="media img1" aria-hidden="true"></div>
-        <div class="content">
-          <h3>Veja dicas</h3>
-          <p>Guia rápido com treinos, técnicas e vídeos curtos para você aplicar hoje no treino.</p>
-        </div>
-      </article>
-
-      <article class="comunidade-card" role="article" aria-label="Compartilhe experiências">
-        <div class="badge">2</div>
-        <div class="media img2" aria-hidden="true"></div>
-        <div class="content">
-          <h3>Compartilhe experiências</h3>
-          <p>Publique seus resultados, aprenda com erros e inspire outras pessoas na comunidade.</p>
-        </div>
-      </article>
-
-      <article class="comunidade-card" role="article" aria-label="Fique por dentro das notícias">
-        <div class="badge">3</div>
-        <div class="media img3" aria-hidden="true"></div>
-        <div class="content">
-          <h3>Fique por dentro das notícias</h3>
-          <p>Conteúdo curado sobre nutrição, ciência do exercício e lançamentos do mundo fitness.</p>
-        </div>
-      </article>
-
-      <article class="comunidade-card" role="article" aria-label="Troque ideias">
-        <div class="badge">4</div>
-        <div class="media img4" aria-hidden="true"></div>
-        <div class="content">
-          <h3>Troque ideias</h3>
-          <p>Converse em threads, participe de grupos e marque treinos com membros próximos.</p>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="section-parceiria">
-  <div class="parceiria-container">
-    <div class="parceiria-img">
-      <img src="{% static 'images/parceiria.png' %}" alt="Programa de Parceiria">
-    </div>
-    <div class="parceiria-content">
-      <h2>PROGRAMA DE PARCERIA</h2>
-      <p>
-        A Fitmark agora está com um novo programa de parceiros no qual remunera 
-        e destaca influenciadores ou marcas que aderirem no programa
-      </p>
-      <a href="/parceria" class="btn">SABER MAIS</a>
-    </div>
-  </div>
-</section>
-{% endblock %}
-
-
 {% block extra_script %}
 <script>
-const phrases = [
-    { text: "é diversidade", desc: "Segmento fitness e bem-estar em expansão, impulsionado por uma sociedade mais consciente sobre saúde.", img: "{% static 'images/fit_e1.png' %}" },
-    { text: "é vida", desc: "A busca por um estilo de vida saudável que combina treinos e alimentação equilibrada.", img: "{% static 'images/fit_e2.png' %}" },
-    { text: "é cultura", desc: "Treinos online e híbridos, experiências personalizadas e forte presença de influenciadores digitais.", img: "{% static 'images/fit_e3.png' %}" },
-    { text: "é diversão", desc: "A prática do fitness também é prazer e socialização, trazendo motivação e bem-estar.", img: "{% static 'images/fit_e4.png' %}" },
-    { text: "é energia", desc: "Movimente-se, supere limites e sinta a adrenalina de cada treino com intensidade e foco.", img: "{% static 'images/fit_e5.png' %}" },
-    { text: "é conexão", desc: "Unindo pessoas e comunidades através de treinos, desafios e experiências compartilhadas.", img: "{% static 'images/fit_e6.png' %}" },
-    { text: "é evolução", desc: "Cada passo no treino é uma conquista, desenvolvendo corpo e mente continuamente.", img: "{% static 'images/fit_e7.png' %}" },
-    { text: "é equilíbrio", desc: "Combinar corpo, mente e hábitos saudáveis para uma vida plena e harmoniosa.", img: "{% static 'images/fit_e8.png' %}" }
-];
+  // JS / Scripts
+  const phrases = [
+      { text: "é diversidade", desc: "Segmento fitness e bem-estar em expansão, impulsionado por uma sociedade mais consciente sobre saúde.", img: "{% static 'images/fit_e1.png' %}" },
+      { text: "é vida", desc: "A busca por um estilo de vida saudável que combina treinos e alimentação equilibrada.", img: "{% static 'images/fit_e2.png' %}" },
+      { text: "é cultura", desc: "Treinos online e híbridos, experiências personalizadas e forte presença de influenciadores digitais.", img: "{% static 'images/fit_e3.png' %}" },
+      { text: "é diversão", desc: "A prática do fitness também é prazer e socialização, trazendo motivação e bem-estar.", img: "{% static 'images/fit_e4.png' %}" },
+      { text: "é energia", desc: "Movimente-se, supere limites e sinta a adrenalina de cada treino com intensidade e foco.", img: "{% static 'images/fit_e5.png' %}" },
+      { text: "é conexão", desc: "Unindo pessoas e comunidades através de treinos, desafios e experiências compartilhadas.", img: "{% static 'images/fit_e6.png' %}" },
+      { text: "é evolução", desc: "Cada passo no treino é uma conquista, desenvolvendo corpo e mente continuamente.", img: "{% static 'images/fit_e7.png' %}" },
+      { text: "é equilíbrio", desc: "Combinar corpo, mente e hábitos saudáveis para uma vida plena e harmoniosa.", img: "{% static 'images/fit_e8.png' %}" }
+  ];
 
-const finalText = "é Fit Mark";
-const finalImage = "{% static 'images/fit_efinal.png' %}";
-const finalImageHeight = "400px";
+  const finalText = "é Fit Mark";
+  const finalImage = "{% static 'images/fit_efinal.png' %}";
+  const finalImageHeight = "400px";
 
-const typingSpeed = 80;
-const deletingSpeed = 40;
-const pauseAfterTyping = 4000;
-const pauseAfterDeleting = 500;
-const pauseOnFinal = 5000;
+  const typingSpeed = 80;
+  const deletingSpeed = 40;
+  const pauseAfterTyping = 4000;
+  const pauseAfterDeleting = 500;
+  const pauseOnFinal = 5000;
 
-const el = document.getElementById('type');
-const descEl = document.getElementById('desc');
-const imgEl = document.getElementById('img');
-const underline = document.getElementById('underline');
-const contentEl = document.getElementById('content');
+  const el = document.getElementById('type');
+  const descEl = document.getElementById('desc');
+  const imgEl = document.getElementById('img');
+  const underline = document.getElementById('underline');
+  const contentEl = document.getElementById('content');
 
-let phraseIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
+  let phraseIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
 
-// --------------------
-// PRÉ-CARREGAMENTO DAS IMAGENS
-// --------------------
-const allImages = phrases.map(p => p.img).concat(finalImage);
+  const allImages = phrases.map(p => p.img).concat(finalImage);
+  allImages.forEach(src => { const img = new Image(); img.src = src; });
 
-allImages.forEach(src => {
-    const img = new Image();
-    img.src = src;
-});
+  function updateFitText(text) {
+      const words = text.split(" ");
+      const lastWord = words.pop() || "";
+      const rest = words.join(" ");
+      el.innerHTML = rest + (rest ? " " : "") + `<span style="color: red;">${lastWord}</span>`;
+  }
 
-// --------------------
-// FUNÇÕES DE TEXTO/ANIMAÇÃO
-// --------------------
-function updateFitText(text) {
-    const words = text.split(" ");
-    const lastWord = words.pop() || "";
-    const rest = words.join(" ");
-    el.innerHTML = rest + (rest ? " " : "") + `<span style="color: red;">${lastWord}</span>`;
-}
+  function showFinal() {
+      el.innerHTML = `<span style="color: red;">${finalText}</span>`;
+      descEl.textContent = "";
+      imgEl.src = finalImage;
+      imgEl.style.height = finalImageHeight;
+      contentEl.classList.add('show');
+      underline.style.width = `${el.offsetWidth}px`;
 
-function showFinal() {
-    el.innerHTML = `<span style="color: red;">${finalText}</span>`;
-    descEl.textContent = "";
-    imgEl.src = finalImage;
-    imgEl.style.height = finalImageHeight;
-    contentEl.classList.add('show');
-    underline.style.width = `${el.offsetWidth}px`;
+      setTimeout(() => {
+          phraseIndex = 0;
+          charIndex = 0;
+          isDeleting = false;
+          tick();
+      }, pauseOnFinal);
+  }
 
-    setTimeout(() => {
-        phraseIndex = 0;
-        charIndex = 0;
-        isDeleting = false;
-        tick();
-    }, pauseOnFinal);
-}
-// Função principal do typewriter usando requestAnimationFrame
-function tick() {
-    requestAnimationFrame(() => {
-        if (phraseIndex >= phrases.length) {
-            showFinal();
-            return;
-        }
+  function tick() {
+      requestAnimationFrame(() => {
+          if (phraseIndex >= phrases.length) {
+              showFinal();
+              return;
+          }
 
-        const current = phrases[phraseIndex].text;
+          const current = phrases[phraseIndex].text;
 
-        if (!isDeleting) {
-            charIndex++;
-            updateFitText(current.substring(0, charIndex));
-            underline.style.width = `${el.offsetWidth}px`;
+          if (!isDeleting) {
+              charIndex++;
+              updateFitText(current.substring(0, charIndex));
+              underline.style.width = `${el.offsetWidth}px`;
 
-            if (charIndex === current.length) {
-                contentEl.classList.remove('show');
-                setTimeout(() => {
-                    descEl.textContent = phrases[phraseIndex].desc;
-                    imgEl.src = phrases[phraseIndex].img;
-                    imgEl.style.height = "auto";
-                    contentEl.classList.add('show');
-                }, 300);
+              if (charIndex === current.length) {
+                  contentEl.classList.remove('show');
+                  setTimeout(() => {
+                      descEl.textContent = phrases[phraseIndex].desc;
+                      imgEl.src = phrases[phraseIndex].img;
+                      imgEl.style.height = "auto";
+                      contentEl.classList.add('show');
+                  }, 300);
 
-                setTimeout(() => { isDeleting = true; tick(); }, pauseAfterTyping);
-                return;
-            }
-            setTimeout(tick, typingSpeed);
-        } else {
-            charIndex--;
-            updateFitText(current.substring(0, charIndex));
-            underline.style.width = `${el.offsetWidth}px`;
+                  setTimeout(() => { isDeleting = true; tick(); }, pauseAfterTyping);
+                  return;
+              }
+              setTimeout(tick, typingSpeed);
+          } else {
+              charIndex--;
+              updateFitText(current.substring(0, charIndex));
+              underline.style.width = `${el.offsetWidth}px`;
 
-            if (charIndex === 0) {
-                isDeleting = false;
-                phraseIndex++;
-                setTimeout(tick, pauseAfterDeleting);
-                return;
-            }
-            setTimeout(tick, deletingSpeed);
-        }
-    });
-}
+              if (charIndex === 0) {
+                  isDeleting = false;
+                  phraseIndex++;
+                  setTimeout(tick, pauseAfterDeleting);
+                  return;
+              }
+              setTimeout(tick, deletingSpeed);
+          }
+      });
+  }
 
-// Inicia typewriter
-setTimeout(tick, 500);
-
-// --------------------
-// TROCA DE IMAGENS PRODUTOS
-// --------------------
-const textos = ["Suplementos", "Roupas", "E muito mais"];
-const imagens = [
-    "{% static 'images/img1_compra.png' %}",
-    "{% static 'images/img2_compra.png' %}",
-    "{% static 'images/img3_compra.png' %}"
-];
-
-// Pré-carregar imagens no cache
-imagens.forEach(src => {
-    const img = new Image();
-    img.src = src;
-});
-
-let index = 0;
-const textoElemento = document.getElementById("texto-rotativo");
-const imgElemento = document.getElementById("imagem-produto");
-
-function esconderElementos() {
-    textoElemento.classList.remove("active");
-    imgElemento.classList.remove("active");
-}
-
-function mostrarElementos() {
-    textoElemento.textContent = textos[index];
-    imgElemento.src = imagens[index];
-    textoElemento.classList.add("active");
-    imgElemento.classList.add("active");
-    index = (index + 1) % textos.length;
-}
-
-function trocarTexto() {
-    esconderElementos();
-    setTimeout(mostrarElementos, 300);
-}
-
-// Inicializa a primeira vez
-setTimeout(mostrarElementos, 100);
-
-// Troca a cada 3s
-setInterval(trocarTexto, 3000);
-      </script>
+  setTimeout(tick, 500);
+</script>
 {% endblock %}
