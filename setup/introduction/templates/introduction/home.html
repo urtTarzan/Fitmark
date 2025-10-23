@@ -1,22 +1,22 @@
 {% extends "introduction/base.html" %}
-
 {% load static %}
 
 {% block extra_fonts %}
-<link href="https://fonts.googleapis.com/css2?family=Alan+Sans:wght@300..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
 {% endblock %}
 
 {% block title %}home{% endblock %}
 
 {% block content %}
-<!-- HTML / Estrutura -->
+<!-- HERO -->
 <section class="hero">
   <div class="hero-content">
     <h1>MERGULHE EM UM<br>ESTILO DE VIDA FITNESS</h1>
-    <button class="hero-btn">Vamos lá!</button>
+    <button class="hero-btn" style="font-family: 'Vietnam', sans-serif;">Vamos lá!</button>
   </div>
 </section>
 
+<!-- FIT -->
 <section id="fit_e">
   <div class="main-text">
     Fit <span id="type" class="typewriter"></span>
@@ -29,6 +29,49 @@
   </div>
 </section>
 
+<!-- METAS -->
+<section class="metas-section">
+  <h2>ACOMPANHE SUAS METAS</h2>
+  <div class="metas-container">
+    <img class="metas-boneco" src="{% static 'images/bonecoapontando.png' %}" alt="Boneco ilustrativo">
+    <img class="metas-grafico" src="{% static 'images/grafico_metas.png' %}" alt="Gráfico de metas">
+  </div>
+</section>
+
+<!-- COMPARTILHE -->
+<section class="compartilhe-section">
+  <div class="compartilhe-overlay">
+    <div class="compartilhe-texto">
+      <h2>COMPARTILHE SUAS<br>EXPERIÊNCIAS ONLINE</h2>
+    </div>
+  </div>
+</section>
+
+<!-- TREINOS PERSONALIZADOS -->
+<section class="personalizados-section">
+  <div class="textos-container">
+    <div class="balao">use treinos personalizados</div>
+    <div class="balao">participe de grupos</div>
+    <div class="balao">acompanhe os melhores produtos do mercado</div>
+    <div class="balao destaque">tudo isso <br><strong>e muito mais</strong></div>
+  </div>
+
+  <div class="imagem-container">
+    <img src="{% static 'images/mulher_pensando.png' %}" alt="Mulher pensando">
+  </div>
+</section>
+
+<!-- NOTICIASASSSSSSSSSSSSSSSSSSSSSSSS -->
+<section class="noticias-section">
+  <div class="noticias-content">
+    <p>acompanhe as últimas<br>notícias do mundo<br>acadêmico e nutrição</p>
+    <h3>EM TEMPO REAL</h3>
+  </div>
+</section>
+
+
+
+<!-- PARCERIA -->
 <section class="section-parceiria">
   <div class="parceiria-container">
     <div class="parceiria-img">
@@ -48,17 +91,17 @@
 
 {% block extra_style %}
 <style>
-  /* CSS / Estilos */
   @font-face {
     font-family: 'Vampire Wars';
     src: url("{% static 'fonts/Vampire_Wars.otf' %}") format('opentype');
-    font-weight: normal;
-    font-style: normal;
   }
 
-  #opa { height: 60px; }
+   @font-face {
+    font-family: 'Vietnam';
+    src: url( "{% static 'fonts/BeVietnamPro-Regular.ttf' %}") format('truetype');
+  }
 
-  /* Hero */
+  /* --- HERO --- */
   .hero {
     display: flex;
     justify-content: center;
@@ -74,11 +117,9 @@
     font-size: 28px;
     font-weight: 700;
     text-transform: uppercase;
-    color: #ffffff;
+    color: #fff;
     margin-bottom: 20px;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5),
-                 0 0 20px rgba(255, 255, 255, 0.4),
-                 0 0 30px rgba(255, 255, 255, 0.3);
+    text-shadow: 0 0 10px rgba(255,255,255,0.5);
   }
 
   .hero-btn {
@@ -91,16 +132,15 @@
     cursor: pointer;
     transition: all 0.3s ease;
   }
-
   .hero-btn:hover {
     background-color: #ff0000;
     color: #fff;
     transform: scale(1.05);
   }
 
-  /* Fit */
+  /* --- FIT --- */
   #fit_e {
-    background-color: #ffffff;
+    background-color: #fff;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -110,14 +150,6 @@
   }
 
   .main-text {
-    font-size: clamp(28px, 5vw, 48px);
-    font-weight: bold;
-    position: relative;
-    display: inline-block;
-    margin-bottom: 10px;
-    text-align: center;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 800px;
     font-size: 7vw;
     font-family: "Vampire Wars", sans-serif;
     font-weight: 200;
@@ -126,9 +158,6 @@
   .main-text .typewriter {
     border-right: 2px solid #0f172a;
     padding-right: 4px;
-    white-space: nowrap;
-    overflow: hidden;
-    vertical-align: bottom;
   }
 
   .underline {
@@ -141,7 +170,6 @@
 
   .fit-content {
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: space-between;
     max-width: 900px;
@@ -159,36 +187,306 @@
 
   .fit-content .description {
     flex: 1;
-    font-size: clamp(14px, 2vw, 18px);
-    line-height: 1.5;
     font-size: 1.5vw;
-    font-family: poppins, sans-serif;
+    font-family: 'Vietnam', sans-serif;
   }
 
   .fit-content img {
     max-width: 300px;
     width: 100%;
-    height: auto;
     border-radius: 8px;
-    flex-shrink: 0;
   }
 
   @media (max-width: 768px) {
     .fit-content {
       flex-direction: column;
       text-align: center;
-      padding: 0 20px;
     }
-
     .fit-content .description {
-      margin-bottom: 20px;
-      padding: 0 5px;
       font-size: 16px;
-      line-height: 1.6;
     }
   }
 
-  /* Section Parceiria */
+  /* --- METAS (com animação scroll) --- */
+  .metas-section {
+    background-color: #eaeaea;
+    text-align: center;
+    padding: 60px 20px;
+    font-family: 'Vampire Wars', sans-serif;
+    font-weight: lighter;
+    overflow: hidden;
+  }
+
+  .metas-section h2 {
+    font-size: 37px;
+    font-weight: 700;
+    margin-bottom: 40px;
+  }
+
+  .metas-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  /* --- Animação da seção Metas --- */
+.metas-section {
+  position: relative;
+  overflow: hidden;
+  background-color: #eaeaea;
+
+}
+
+/* Estado inicial (fora de cena) */
+.metas-section .metas-boneco,
+.metas-section .metas-grafico {
+  opacity: 0;
+  transform: translateY(24px) scale(0.98);
+  transition: transform 0.8s ease, opacity 0.8s ease;
+  will-change: transform, opacity;
+  display: block;
+}
+
+/* Direções diferentes pra cada lado */
+.metas-section .metas-boneco {
+  transform: translateX(-60px);
+}
+.metas-section .metas-grafico {
+  transform: translateX(60px);
+}
+
+/* Quando visível */
+.metas-section.metas-visible .metas-boneco,
+.metas-section.metas-visible .metas-grafico {
+  opacity: 1;
+  transform: translateX(0) translateY(0) scale(1);
+}
+
+/* Pequeno atraso no gráfico */
+.metas-section.metas-visible .metas-grafico {
+  transition-delay: 0.18s;
+}
+
+/* Animação do título */
+.metas-section h2 {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.8s ease;
+}
+.metas-section.metas-visible h2 {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+  @media (max-width: 768px) {
+    .metas-container { flex-direction: column; gap: 20px; }
+    .metas-boneco, .metas-grafico { width: 80%; }
+  }
+/* --- COMPARTILHE SUAS EXPERIÊNCIAS --- */
+.compartilhe-section {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  background-image: url("{% static 'images/garotascelular.avif' %}");
+  background-size: cover;
+  background-position: center 30%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+.compartilhe-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.7) 40%, transparent 60%);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 5%;
+}
+
+.compartilhe-texto {
+  color: #fff;
+  z-index: 2;
+  max-width: 40%;
+  font-family: 'Vietnam', sans-serif;
+}
+
+.compartilhe-texto h2 {
+  font-size: 2.3rem;
+  font-weight: 700;
+  line-height: 1.3;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .compartilhe-section {
+    height: 300px;
+    justify-content: center;
+  }
+
+  .compartilhe-overlay {
+    background: rgba(0, 0, 0, 0.6);
+    padding-left: 0;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .compartilhe-texto {
+    max-width: 80%;
+  }
+
+  .compartilhe-texto h2 {
+    font-size: 1.6rem;
+  }
+}
+
+/* --- TREINOS PERSONALIZADOS --- */
+.personalizados-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 60px 40px;
+  background-color: #fff;
+  flex-wrap: wrap;
+  font-family: 'Vietnam', sans-serif;
+}
+
+.textos-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.balao {
+  background-color: #d6d1d1;
+  padding: 18px 28px;
+  border-radius: 20px;
+  font-size: 18px;
+  color: #000;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  width: fit-content;
+  max-width: 280px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.balao:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+}
+
+.balao.destaque {
+  background-color: #bfbaba;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.imagem-container img {
+  width: 340px;
+  height: auto;
+  object-fit: contain;
+}
+
+.imagem-container {
+  position: relative;
+  top: 80px; /* abaixa a imagem */
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .personalizados-section {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+
+  .textos-container {
+    align-items: center;
+  }
+
+  .balao {
+    max-width: 80%;
+    font-size: 16px;
+  }
+
+  .imagem-container img {
+    width: 220px;
+  }
+}
+
+
+/* --- NOTÍCIAS --- */
+/* --- NOTÍCIAS --- */
+.noticias-section {
+  position: relative;
+  width: 100%;
+  height: 500px; /* ajuste conforme necessário */
+  background-image: url("{% static 'images/jornalista.jpg' %}");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;      /* centraliza verticalmente */
+  justify-content: center;  /* centraliza horizontalmente */
+  text-align: center;
+  color: #fff;
+  font-family: 'Vietnam', sans-serif;
+  overflow: hidden;
+}
+
+.noticias-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4); /* leve escurecimento p/ legibilidade */
+}
+
+.noticias-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  padding: 20px;
+}
+
+.noticias-content p {
+  font-size: 24px;
+  line-height: 1.5;
+  margin-bottom: 15px;
+  font-weight: 400;
+}
+
+.noticias-content h3 {
+  font-size: 32px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .noticias-section {
+    height: 400px;
+    padding: 0 20px;
+  }
+
+  .noticias-content p {
+    font-size: 18px;
+  }
+
+  .noticias-content h3 {
+    font-size: 22px;
+  }
+}
+
+
+  /* --- PARCERIA --- */
   .section-parceiria {
     background: #f5f5f5;
     padding: 40px 20px;
@@ -202,75 +500,41 @@
     max-width: 1100px;
     margin: 0 auto;
     gap: 40px;
+    font-family: 'Vietnam', sans-serif;
   }
 
-  .parceiria-img img {
-    max-width: auto;
-    height: 500px;
-    margin-bottom:0px;
-  }
-
-  .parceiria-content {
-    max-width: 500px;
-  }
-
-  .parceiria-content h2 {
-    font-size: 38px;
-    font-weight: bold;
-    margin-bottom: 15px;
-    color: #000;
-  }
-
-  .parceiria-content p {
-    font-size: 20px;
-    color: #333;
-    margin-bottom: 20px;
-    line-height: 1.5;
-  }
+  .parceiria-img img { height: 500px; }
+  .parceiria-content h2 { font-size: 38px; font-weight: bold; margin-bottom: 15px; }
+  .parceiria-content p { font-size: 20px; color: #333; margin-bottom: 20px; line-height: 1.5; }
 
   .parceiria-content .btn {
     background-color: #ff1a1a;
-    color: white;
+    color: #fff;
     padding: 12px 25px;
-    border: none;
     border-radius: 12px;
+    font-family: 'Vietnam', sans-serif;
     font-size: 16px;
     font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(255, 26, 26, 0.5);
-    transition: all 0.3s ease;
-    display: inline-block;
-    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(255,26,26,0.5);
     text-decoration: none;
+    transition: all 0.3s ease;
   }
-
   .parceiria-content .btn:hover {
     background-color: #ff4d4d;
-    box-shadow: 0 0 20px rgba(255, 26, 26, 0.8);
+    box-shadow: 0 0 20px rgba(255,26,26,0.8);
     transform: translateY(-2px);
   }
 
   @media (max-width: 768px) {
-    .parceiria-container {
-      flex-direction: column;
-      text-align: center;
-    }
-
-    .parceiria-img {
-      display: none;
-    }
-
-    .parceiria-content .btn {
-      display: inline-block;
-      margin-top: 20px;
-    }
+    .parceiria-container { flex-direction: column; text-align: center; }
+    .parceiria-img { display: none; }
   }
 </style>
 {% endblock %}
 
 {% block extra_script %}
 <script>
-  // JS / Scripts
+  /* --- TEXTO FIT ANIMADO --- */
   const phrases = [
       { text: "é diversidade", desc: "Segmento fitness e bem-estar em expansão, impulsionado por uma sociedade mais consciente sobre saúde.", img: "{% static 'images/fit_e1.png' %}" },
       { text: "é vida", desc: "A busca por um estilo de vida saudável que combina treinos e alimentação equilibrada.", img: "{% static 'images/fit_e2.png' %}" },
@@ -281,96 +545,86 @@
       { text: "é evolução", desc: "Cada passo no treino é uma conquista, desenvolvendo corpo e mente continuamente.", img: "{% static 'images/fit_e7.png' %}" },
       { text: "é equilíbrio", desc: "Combinar corpo, mente e hábitos saudáveis para uma vida plena e harmoniosa.", img: "{% static 'images/fit_e8.png' %}" }
   ];
-
   const finalText = "é Fit Mark";
   const finalImage = "{% static 'images/fit_efinal.png' %}";
-  const finalImageHeight = "400px";
-
-  const typingSpeed = 80;
-  const deletingSpeed = 40;
-  const pauseAfterTyping = 4000;
-  const pauseAfterDeleting = 500;
-  const pauseOnFinal = 5000;
-
-  const el = document.getElementById('type');
-  const descEl = document.getElementById('desc');
-  const imgEl = document.getElementById('img');
-  const underline = document.getElementById('underline');
-  const contentEl = document.getElementById('content');
-
-  let phraseIndex = 0;
-  let charIndex = 0;
-  let isDeleting = false;
-
-  const allImages = phrases.map(p => p.img).concat(finalImage);
-  allImages.forEach(src => { const img = new Image(); img.src = src; });
+  const typingSpeed = 80, deletingSpeed = 40, pauseAfterTyping = 4000;
+  const el = document.getElementById('type'), descEl = document.getElementById('desc'), imgEl = document.getElementById('img'), underline = document.getElementById('underline'), contentEl = document.getElementById('content');
+  let phraseIndex = 0, charIndex = 0, isDeleting = false;
 
   function updateFitText(text) {
-      const words = text.split(" ");
-      const lastWord = words.pop() || "";
-      const rest = words.join(" ");
-      el.innerHTML = rest + (rest ? " " : "") + `<span style="color: red;">${lastWord}</span>`;
-  }
-
-  function showFinal() {
-      el.innerHTML = `<span style="color: red;">${finalText}</span>`;
-      descEl.textContent = "";
-      imgEl.src = finalImage;
-      imgEl.style.height = finalImageHeight;
-      contentEl.classList.add('show');
-      underline.style.width = `${el.offsetWidth}px`;
-
-      setTimeout(() => {
-          phraseIndex = 0;
-          charIndex = 0;
-          isDeleting = false;
-          tick();
-      }, pauseOnFinal);
+    const words = text.split(" ");
+    const last = words.pop();
+    el.innerHTML = words.join(" ") + (words.length ? " " : "") + `<span style="color:red;">${last}</span>`;
   }
 
   function tick() {
-      requestAnimationFrame(() => {
-          if (phraseIndex >= phrases.length) {
-              showFinal();
-              return;
-          }
-
-          const current = phrases[phraseIndex].text;
-
-          if (!isDeleting) {
-              charIndex++;
-              updateFitText(current.substring(0, charIndex));
-              underline.style.width = `${el.offsetWidth}px`;
-
-              if (charIndex === current.length) {
-                  contentEl.classList.remove('show');
-                  setTimeout(() => {
-                      descEl.textContent = phrases[phraseIndex].desc;
-                      imgEl.src = phrases[phraseIndex].img;
-                      imgEl.style.height = "auto";
-                      contentEl.classList.add('show');
-                  }, 300);
-
-                  setTimeout(() => { isDeleting = true; tick(); }, pauseAfterTyping);
-                  return;
-              }
-              setTimeout(tick, typingSpeed);
-          } else {
-              charIndex--;
-              updateFitText(current.substring(0, charIndex));
-              underline.style.width = `${el.offsetWidth}px`;
-
-              if (charIndex === 0) {
-                  isDeleting = false;
-                  phraseIndex++;
-                  setTimeout(tick, pauseAfterDeleting);
-                  return;
-              }
-              setTimeout(tick, deletingSpeed);
-          }
-      });
+    const current = phrases[phraseIndex].text;
+    if (!isDeleting) {
+      charIndex++;
+      updateFitText(current.substring(0, charIndex));
+      underline.style.width = `${el.offsetWidth}px`;
+      if (charIndex === current.length) {
+        contentEl.classList.remove('show');
+        setTimeout(() => {
+          descEl.textContent = phrases[phraseIndex].desc;
+          imgEl.src = phrases[phraseIndex].img;
+          contentEl.classList.add('show');
+        }, 300);
+        setTimeout(() => { isDeleting = true; tick(); }, pauseAfterTyping);
+        return;
+      }
+      setTimeout(tick, typingSpeed);
+    } else {
+      charIndex--;
+      updateFitText(current.substring(0, charIndex));
+      underline.style.width = `${el.offsetWidth}px`;
+      if (charIndex === 0) {
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+      }
+      setTimeout(tick, deletingSpeed);
+    }
   }
-
   setTimeout(tick, 500);
+
+ // --- Efeito "entrar na tela" para a seção Metas (reinicia ao rolar) ---
+(function () {
+  const metasSection = document.querySelector('.metas-section');
+  if (!metasSection) return;
+
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            metasSection.classList.add('metas-visible');
+          } else {
+            metasSection.classList.remove('metas-visible'); // reseta ao sair da tela
+          }
+        });
+      },
+      {
+        threshold: 0.25,
+        rootMargin: '0px 0px -10% 0px',
+      }
+    );
+    io.observe(metasSection);
+  } else {
+    // Fallback pra navegadores antigos
+    const check = () => {
+      const rect = metasSection.getBoundingClientRect();
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      if (rect.top < vh * 0.75 && rect.bottom > vh * 0.25) {
+        metasSection.classList.add('metas-visible');
+      } else {
+        metasSection.classList.remove('metas-visible');
+      }
+    };
+    window.addEventListener('scroll', check, { passive: true });
+    window.addEventListener('resize', check);
+    check();
+  }
+})();
+
 </script>
 {% endblock %}
